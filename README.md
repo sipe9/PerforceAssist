@@ -34,13 +34,13 @@ http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_info.html
 
 http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_client.html
 
-	P4ClientCommand client("myworkspace");
+	P4ClientCommand client("TestWorkSpace");
 	task.runCommand(&client, CommandArgs());
 	
 ##### Update client spec
 
 	// Get current spec
-	P4ClientCommand client("myworkspace");
+	P4ClientCommand client("TestWorkSpace");
 	task.runCommand(&client, CommandArgs());
 
 	// Modify spec
