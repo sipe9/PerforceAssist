@@ -30,7 +30,7 @@ http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_info.html
 
 ##### Get client spec
 
-"Get client workspace specification and its view."
+"Create or edit a client workspace specification and its view."
 
 http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_client.html
 
