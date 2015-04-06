@@ -12,46 +12,86 @@ First create instance of P4Task, set parameters and connect to P4 with connect()
 Then run commands with task.runCommand();
 
 #### Info
+"Display information about the current Perforce application and the shared versioning service."
+
+http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_info.html
+
 	P4InfoCommand info("info");
 	task.runCommand(&info, CommandArgs());
 
 #### Add
+"Open file(s) in a client workspace for addition to the depot."
+
+http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_add.html
+
 	P4AddCommand add("16");
 	add.AddPath("k:/Perforce/TestWorkSpace/data/...");
 	task.runCommand(&add, CommandArgs());
 
 #### Edit
+"Opens file(s) in a client workspace for edit."
+
+http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_edit.html
+
 	P4EditCommand edit("16", false);
 	edit.AddPath("//data/...");
 	task.runCommand(&edit, CommandArgs());
 
 #### New changelist
+"Create or edit a changelist specification."
+
+http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_change.html
+
 	P4NewChangelistCommand change("TestWorkSpace", "username", "Description");
 	task.runCommand(&change, CommandArgs());
 
-#### List pending changelists
+#### Changes
+"List submitted and pending changelists."
+
+http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_changes.html
+
 	P4PendingChangelistCommand pending(g_username);
 	task.runCommand(&pending, CommandArgs());
 
 #### Sync
+"Update the client workspace to reflect the contents of the depot."
+
+http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_sync.html
+
 	P4SyncCommand sync;
 	sync.AddPath("//data/...");
 	task.runCommand(&sync, CommandArgs());
 
 #### List opened files
+"List files that are open in pending changelists."
+
+http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_opened.html
+
 	P4OpenedCommand opened("29", "");
 	task.runCommand(&opened, CommandArgs());
 
 #### Revert changes
+"Discard changes made to open files."
+
+http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_revert.html
+
 	P4RevertChangesCommand revert(false);
 	task.runCommand(&revert, CommandArgs());
 
 #### Lock
+"Lock an opened file against changelist submission."
+
+http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_lock.html
+
 	P4LockCommand lock;
 	lock.AddPath("//data/test/...");
 	task.runCommand(&lock, CommandArgs());
 
 #### Unlock
+"Release the lock on a file."
+
+http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_unlock.html
+
 	P4UnlockCommand unlock;
 	unlock.AddPath("//data/test/...");
 	task.runCommand(&unlock, CommandArgs());
