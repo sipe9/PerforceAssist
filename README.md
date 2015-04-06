@@ -8,7 +8,7 @@ RELEASE = 2015 1;
 PATCHLEVEL = 1028542;
 SUPPDATE = 2015/03/20;
 
-## How to usage PerforceAssist
+## How to use PerforceAssist
 
 First create instance of P4Task, set parameters and connect to P4 with connect();
 
