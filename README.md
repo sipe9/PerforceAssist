@@ -8,7 +8,7 @@ RELEASE = 2015 1;
 PATCHLEVEL = 1028542;
 SUPPDATE = 2015/03/20;
 
-## How to usage PerforceAssist
+## How to use PerforceAssist
 
 First create instance of P4Task, set parameters and connect to P4 with connect();
 
@@ -25,6 +25,31 @@ http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_info.html
 
 	P4InfoCommand info("info");
 	task.runCommand(&info, CommandArgs());
+
+#### Client
+
+##### Get client spec
+
+"Create or edit a client workspace specification and its view."
+
+http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_client.html
+
+	P4ClientCommand client("TestWorkSpace");
+	task.runCommand(&client, CommandArgs());
+	
+##### Update client spec
+
+	// Get current spec
+	P4ClientCommand client("TestWorkSpace");
+	task.runCommand(&client, CommandArgs());
+
+	// Modify spec
+	P4ClientData data = client.GetClientData();
+	data.view.emplace_back("-//data/.../*.zip //TestWorkSpace/data/.../*.zip");
+
+	// Update spec
+	P4ClientUpdateCommand clientUpdate(data);
+	task.runCommand(&clientUpdate, CommandArgs());
 
 #### Add
 "Open file(s) in a client workspace for addition to the depot."
