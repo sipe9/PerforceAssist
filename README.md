@@ -26,6 +26,31 @@ http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_info.html
 	P4InfoCommand info("info");
 	task.runCommand(&info, CommandArgs());
 
+#### Client
+
+##### Get client spec
+
+"Get client workspace specification and its view."
+
+http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_client.html
+
+	P4ClientCommand client("myworkspace");
+	task.runCommand(&client, CommandArgs());
+	
+##### Update client spec
+
+	// Get current spec
+	P4ClientCommand client("myworkspace");
+	task.runCommand(&client, CommandArgs());
+
+	// Modify spec
+	P4ClientData data = client.GetClientData();
+	data.view.emplace_back("-//data/.../*.zip //TestWorkSpace/data/.../*.zip");
+
+	// Update spec
+	P4ClientUpdateCommand clientUpdate(data);
+	task.runCommand(&clientUpdate, CommandArgs());
+
 #### Add
 "Open file(s) in a client workspace for addition to the depot."
 
