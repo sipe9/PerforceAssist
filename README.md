@@ -105,7 +105,7 @@ http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_unlock.html
 	
 ## Combinations
 
-#### Revert all of the files in changelist
+#### Revert all of the files in specific changelist
 
 This requires two commands, first get list of opened files from changelist and then feed this result to revert command.
 
