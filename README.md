@@ -99,7 +99,8 @@ http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_sync.html
 
 http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_opened.html
 
-	P4OpenedCommand opened("29", "");
+	P4OpenedCommand opened;
+	opened.SetChangelist("29");
 	task.runCommand(&opened, CommandArgs());
 
 #### Revert changes
