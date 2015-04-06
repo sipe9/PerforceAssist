@@ -1,5 +1,5 @@
 # PerforceAssist
-Perforce Assist wraps common Perforce commands with simple API interface
+Perforce Assist wraps common Perforce commands behind simple interface
 
 Fully written in C++ and using standard libraries such as std::string and std::vector. Currently assumes windows as target, shouldn't be an issue to make it work on other platforms.
 
