@@ -50,6 +50,9 @@
     <ClCompile Include="Commands\P4ClientCommand.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
+    <ClCompile Include="Commands\P4ClientUpdateCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Commands\P4SyncCommand.hpp">
@@ -98,6 +101,12 @@
       <Filter>Commands</Filter>
     </ClInclude>
     <ClInclude Include="Commands\P4ClientCommand.hpp">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\P4ClientUpdateCommand.hpp">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\P4Client.hpp">
       <Filter>Commands</Filter>
     </ClInclude>
   </ItemGroup>

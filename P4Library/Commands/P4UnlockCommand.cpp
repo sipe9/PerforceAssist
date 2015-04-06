@@ -48,8 +48,6 @@ namespace VersionControl
 			return P4UnlockResult::Unlocked;
 		else if(StringUtil::Contains(message, g_AlreadyUnlocked))
 			return P4UnlockResult::AlreadyUnlocked;
-		/*else if(StringUtil::Contains(message, g_notOpenedOnThisClient))
-			return P4UnlockResult::Failed;*/
 		else
 		{
 			printf("Failed to parse P4UnlockResult from %s\n", message.c_str());

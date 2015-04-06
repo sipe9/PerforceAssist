@@ -159,6 +159,7 @@
   <ItemGroup>
     <ClCompile Include="Commands\P4AddCommand.cpp" />
     <ClCompile Include="Commands\P4ClientCommand.cpp" />
+    <ClCompile Include="Commands\P4ClientUpdateCommand.cpp" />
     <ClCompile Include="Commands\P4LockCommand.cpp" />
     <ClCompile Include="Commands\P4OpenedCommand.cpp" />
     <ClCompile Include="Commands\P4RevertChangesCommand.cpp" />
@@ -177,7 +178,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Commands\P4AddCommand.hpp" />
+    <ClInclude Include="Commands\P4Client.hpp" />
     <ClInclude Include="Commands\P4ClientCommand.hpp" />
+    <ClInclude Include="Commands\P4ClientUpdateCommand.hpp" />
     <ClInclude Include="Commands\P4LockCommand.hpp" />
     <ClInclude Include="Commands\P4OpenedCommand.hpp" />
     <ClInclude Include="Commands\P4RevertChangesCommand.hpp" />

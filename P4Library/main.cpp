@@ -13,6 +13,7 @@
 #include "Commands/P4LockCommand.hpp"
 #include "Commands/P4UnlockCommand.hpp"
 #include "Commands/P4ClientCommand.hpp"
+#include "Commands/P4ClientUpdateCommand.hpp"
 
 #include "Utils/PathUtil.hpp"
 
@@ -78,6 +79,12 @@ void P4Test(P4Task &task)
 
 	P4ClientCommand client(g_workspace);
 	task.runCommand(&client, CommandArgs());
+
+	P4ClientData data = client.GetClientData();
+	data.view.emplace_back("-//data/.../*.zip //TestWorkSpace/data/.../*.zip");
+
+	P4ClientUpdateCommand clientUpdate(data);
+	task.runCommand(&clientUpdate, CommandArgs());
 }
 
 void main()

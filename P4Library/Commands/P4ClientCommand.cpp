@@ -21,7 +21,7 @@ namespace VersionControl
 
 	P4ClientCommand::P4ClientCommand(const std::string &client) : 
 		P4Command("client"),
-		m_client(client)	
+		m_client(client)
 	{
 	}
 
@@ -72,21 +72,17 @@ namespace VersionControl
 				// Step to next line
 				i++;
 
-				std::string desc = "";
-
 				do
 				{
 					std::string descLine = lines[i];
 					descLine = StringUtil::TrimStart(descLine, ' ');
 					descLine = StringUtil::TrimStart(descLine, '\t');
 
-					desc += descLine + "\n";
+					m_clientResult.descriptionLines.emplace_back(descLine);
 
 					i++;
 
-				} while (i < lines.size() && StringUtil::startsWith(lines[i], "\t"));
-
-				m_clientResult.description = desc;
+				} while (i < lines.size() && StringUtil::startsWith(lines[i], "\t"));				
 
 				continue;
 			}
