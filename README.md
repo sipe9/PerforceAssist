@@ -1,7 +1,7 @@
 # PerforceAssist
 Perforce Assist wraps common Perforce commands with simple API interface
 
-# How to usage PerforceAssist
+## How to usage PerforceAssist
 
 First create instance of P4Task, set parameters and connect to P4 with connect();
 
@@ -11,54 +11,54 @@ First create instance of P4Task, set parameters and connect to P4 with connect()
 	
 Then run commands with task.runCommand();
 
-### Info
+#### Info
 	P4InfoCommand info("info");
 	task.runCommand(&info, CommandArgs());
 
-### Add
+#### Add
 	P4AddCommand add("16");
 	add.AddPath("k:/Perforce/TestWorkSpace/data/...");
 	task.runCommand(&add, CommandArgs());
 
-### Edit
+#### Edit
 	P4EditCommand edit("16", false);
 	edit.AddPath("//data/...");
 	task.runCommand(&edit, CommandArgs());
 
-### New changelist
-	P4NewChangelistCommand change(workspace, username, "New changelist");
+#### New changelist
+	P4NewChangelistCommand change("TestWorkSpace", "username", "Description");
 	task.runCommand(&change, CommandArgs());
 
-### List pending changelists
+#### List pending changelists
 	P4PendingChangelistCommand pending(g_username);
 	task.runCommand(&pending, CommandArgs());
 
-### Sync
+#### Sync
 	P4SyncCommand sync;
 	sync.AddPath("//data/...");
 	task.runCommand(&sync, CommandArgs());
 
-### List opened files
+#### List opened files
 	P4OpenedCommand opened("29", "");
 	task.runCommand(&opened, CommandArgs());
 
-### Revert changes
+#### Revert changes
 	P4RevertChangesCommand revert(false);
 	task.runCommand(&revert, CommandArgs());
 
-### Lock
+#### Lock
 	P4LockCommand lock;
 	lock.AddPath("//data/test/...");
 	task.runCommand(&lock, CommandArgs());
 
-### Unlock
+#### Unlock
 	P4UnlockCommand unlock;
 	unlock.AddPath("//data/test/...");
 	task.runCommand(&unlock, CommandArgs());
 	
 ## Combinations
 
-### Revert all of the files in changelist
+#### Revert all of the files in changelist
 
 This requires two commands, first get list of opened files from changelist and then feed this result to revert command.
 
