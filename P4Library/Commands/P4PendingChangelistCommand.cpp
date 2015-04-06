@@ -1,0 +1,71 @@
+
+#include "P4PendingChangelistCommand.hpp"
+
+#include "../Utils/StringUtil.hpp"
+
+#include <sstream>
+
+namespace VersionControl
+{	
+	static const char* g_Pending0 = "Change";
+	static const char* g_Pending2 = "on";
+	static const char* g_Pending4 = "by";
+
+	P4PendingChangelistCommand::P4PendingChangelistCommand(const std::string &user) : 
+		P4Command("pending"),
+		m_user(user)
+	{
+	}
+
+	bool P4PendingChangelistCommand::Run(P4Task &task, const CommandArgs &args)
+	{
+		m_pendingChangelists.clear();
+
+		CommandArgs myArgs;
+		myArgs.emplace_back("-s");
+		myArgs.emplace_back("pending");
+
+		if(!m_user.empty())
+		{
+			myArgs.emplace_back("-u");
+			myArgs.emplace_back(std::string(m_user));
+		}
+
+		std::copy(args.begin(), args.end(), std::back_inserter(myArgs));
+		return task.runP4Command("changes", myArgs, this);
+	}
+
+	void P4PendingChangelistCommand::OutputInfo(char level, const char *data)
+	{
+		std::stringstream stream(data);
+		std::string line;
+		while(std::getline(stream, line))
+		{
+			std::vector<std::string> split;
+			StringUtil::Split(line, ' ', split);
+
+			if(split.size() >= 8)
+			{
+				if(split[0] == g_Pending0 && StringUtil::IsPositiveNumber(split[1]) && 
+					split[2] == g_Pending2 && 
+					split[4] == g_Pending4)
+				{
+					P4PendingChangelistResult result;
+					result.changelist = split[1];
+					result.creationtime = split[3];										
+					result.user = split[5];
+					result.status = StringUtil::Trim(split[6], '*');
+
+					// Find 'description' from the string
+					std::string desc = line;
+					desc = StringUtil::SplitByFirstOf(desc, '\'', false);
+					desc = StringUtil::Trim(desc, '\'');
+
+					result.description = desc;
+
+					m_pendingChangelists.emplace_back(result);
+				}				
+			}			
+		}
+	}
+}
