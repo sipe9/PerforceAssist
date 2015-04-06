@@ -16,9 +16,9 @@ namespace VersionControl
 	static const char* g_WasDeletedAddDeleted = "was move/add, deleted";
 	static const char* g_WasEditUnlockedAndReverted = "was edit, unlocked and reverted";	
 
-	P4RevertChangesCommand::P4RevertChangesCommand(std::string changelist, bool onlyUnchanged) : 
+	P4RevertChangesCommand::P4RevertChangesCommand(bool onlyUnchanged) : 
 		P4Command("revert"),
-		m_changelist(changelist),
+		m_changelist(""),
 		m_onlyUnchanged(onlyUnchanged)
 	{
 	}

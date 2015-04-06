@@ -8,7 +8,7 @@
 
 namespace VersionControl
 {
-	struct P4PendingChangelistResult
+	struct P4ChangesResult
 	{
 		std::string changelist;
 		std::string creationtime;
@@ -17,21 +17,23 @@ namespace VersionControl
 		std::string status;
 	};
 
-	class P4PendingChangelistCommand : public P4Command
+	class P4ChangesCommand : public P4Command
 	{
 
 	public:		
 
-		P4PendingChangelistCommand(const std::string &user);
+		P4ChangesCommand(const std::string &user);
 
 		virtual bool Run(P4Task &task, const CommandArgs &args);
 
 		void OutputInfo(char level, const char *data);		
 
+		const std::vector<P4ChangesResult> &GetChanges() const { return m_changes; }
+
 	private:
 		
 		std::string		m_user;
 
-		std::vector<P4PendingChangelistResult> m_pendingChangelists;
+		std::vector<P4ChangesResult> m_changes;
 	};
 }

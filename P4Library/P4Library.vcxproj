@@ -166,7 +166,7 @@
     <ClCompile Include="Commands\P4Command.cpp" />
     <ClCompile Include="Commands\P4EditCommand.cpp" />
     <ClCompile Include="Commands\P4InfoCommand.cpp" />
-    <ClCompile Include="Commands\P4PendingChangelistCommand.cpp" />
+    <ClCompile Include="Commands\P4ChangesCommand.cpp" />
     <ClCompile Include="Commands\P4StatusCommand.cpp" />
     <ClCompile Include="Commands\P4UnlockCommand.cpp" />
     <ClCompile Include="main.cpp" />
@@ -184,7 +184,7 @@
     <ClInclude Include="Commands\P4Command.hpp" />
     <ClInclude Include="Commands\P4EditCommand.hpp" />
     <ClInclude Include="Commands\P4InfoCommand.hpp" />
-    <ClInclude Include="Commands\P4PendingChangelistCommand.hpp" />
+    <ClInclude Include="Commands\P4ChangesCommand.hpp" />
     <ClInclude Include="Commands\P4StatusCommand.hpp" />
     <ClInclude Include="Commands\P4UnlockCommand.hpp" />
     <ClInclude Include="P4Task.hpp" />

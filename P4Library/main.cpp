@@ -6,7 +6,7 @@
 #include "Commands/P4AddCommand.hpp"
 #include "Commands/P4EditCommand.hpp"
 #include "Commands/P4NewChangelistCommand.hpp"
-#include "Commands/P4PendingChangelistCommand.hpp"
+#include "Commands/P4ChangesCommand.hpp"
 #include "Commands/P4SyncCommand.hpp"
 #include "Commands/P4RevertChangesCommand.hpp"
 #include "Commands/P4OpenedCommand.hpp"
@@ -42,7 +42,7 @@ void P4Test(P4Task &task)
 	/*P4NewChangelistCommand change(workspace, username, "New changelist");
 	task.runCommand(&change, CommandArgs());*/
 
-	/*P4PendingChangelistCommand pending(g_username);
+	/*P4ChangesCommand pending(g_username);
 	task.runCommand(&pending, CommandArgs());*/
 
 	/*P4SyncCommand sync;
@@ -52,7 +52,7 @@ void P4Test(P4Task &task)
 	P4OpenedCommand opened("29", "");
 	task.runCommand(&opened, CommandArgs());
 
-	P4RevertChangesCommand revert("29", false);
+	P4RevertChangesCommand revert(false);
 	for(auto &tmp : opened.GetOpenedFiles())
 	{
 		revert.AddPath(tmp.first);

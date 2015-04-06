@@ -20,9 +20,6 @@
     <ClCompile Include="Commands\P4OpenedCommand.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
-    <ClCompile Include="Commands\P4PendingChangelistCommand.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
     <ClCompile Include="Commands\P4RevertChangesCommand.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
@@ -45,6 +42,9 @@
       <Filter>Commands</Filter>
     </ClCompile>
     <ClCompile Include="Commands\P4UnlockCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\P4ChangesCommand.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
   </ItemGroup>
@@ -70,9 +70,6 @@
     <ClInclude Include="Commands\P4OpenedCommand.hpp">
       <Filter>Commands</Filter>
     </ClInclude>
-    <ClInclude Include="Commands\P4PendingChangelistCommand.hpp">
-      <Filter>Commands</Filter>
-    </ClInclude>
     <ClInclude Include="Commands\P4RevertChangesCommand.hpp">
       <Filter>Commands</Filter>
     </ClInclude>
@@ -92,6 +89,9 @@
       <Filter>Commands</Filter>
     </ClInclude>
     <ClInclude Include="Commands\P4UnlockCommand.hpp">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\P4ChangesCommand.hpp">
       <Filter>Commands</Filter>
     </ClInclude>
   </ItemGroup>

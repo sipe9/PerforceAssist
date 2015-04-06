@@ -1,5 +1,5 @@
 
-#include "P4PendingChangelistCommand.hpp"
+#include "P4ChangesCommand.hpp"
 
 #include "../Utils/StringUtil.hpp"
 
@@ -11,15 +11,15 @@ namespace VersionControl
 	static const char* g_Pending2 = "on";
 	static const char* g_Pending4 = "by";
 
-	P4PendingChangelistCommand::P4PendingChangelistCommand(const std::string &user) : 
-		P4Command("pending"),
+	P4ChangesCommand::P4ChangesCommand(const std::string &user) : 
+		P4Command("changes"),
 		m_user(user)
 	{
 	}
 
-	bool P4PendingChangelistCommand::Run(P4Task &task, const CommandArgs &args)
+	bool P4ChangesCommand::Run(P4Task &task, const CommandArgs &args)
 	{
-		m_pendingChangelists.clear();
+		m_changes.clear();
 
 		CommandArgs myArgs;
 		myArgs.emplace_back("-s");
@@ -35,7 +35,7 @@ namespace VersionControl
 		return task.runP4Command("changes", myArgs, this);
 	}
 
-	void P4PendingChangelistCommand::OutputInfo(char level, const char *data)
+	void P4ChangesCommand::OutputInfo(char level, const char *data)
 	{
 		std::stringstream stream(data);
 		std::string line;
@@ -50,7 +50,7 @@ namespace VersionControl
 					split[2] == g_Pending2 && 
 					split[4] == g_Pending4)
 				{
-					P4PendingChangelistResult result;
+					P4ChangesResult result;
 					result.changelist = split[1];
 					result.creationtime = split[3];										
 					result.user = split[5];
@@ -63,7 +63,7 @@ namespace VersionControl
 
 					result.description = desc;
 
-					m_pendingChangelists.emplace_back(result);
+					m_changes.emplace_back(result);
 				}				
 			}			
 		}
