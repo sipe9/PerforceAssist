@@ -113,6 +113,8 @@ This requires two commands, first get list of opened files from changelist and t
 	#include "Commands/P4OpenedCommand.hpp"
 	#include "Commands/P4RevertChangesCommand.hpp"
 	
+	#include <string>
+	
 	using namespace VersionControl;
 	
 	void main()
