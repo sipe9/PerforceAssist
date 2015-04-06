@@ -3,6 +3,7 @@
 #include "P4StatusCommand.hpp"
 
 #include "../Utils/StringUtil.hpp"
+#include "../Utils/PathUtil.hpp"
 
 #include <sstream>
 
@@ -55,7 +56,7 @@ namespace VersionControl
 			if(m_reportOnlyAdded && result != P4AddResult::OpenedForAdd)
 				continue;
 
-			std::string depotFilename = StringUtil::parseDepotFilename(line);
+			std::string depotFilename = PathUtil::parseDepotPathFromString(line);
 			m_files[depotFilename] = result;
 		}
 	}

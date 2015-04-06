@@ -71,27 +71,6 @@ bool StringUtil::Contains(const std::string &s, const std::string &string)
 	return (s.find(string) != std::string::npos);
 }
 
-std::string StringUtil::parseDepotFilename(const std::string &from)
-{
-	// Strip messages and revision numbers from the string
-	std::string tmp = SplitByLastOf(from, '-', true);
-	tmp = SplitByLastOf(tmp, '#', true);
-
-	// Make sure we start with proper depot backslashes
-	int splitpos = tmp.find("//");
-
-	if(splitpos == std::string::npos)
-	{
-		printf("Filename %s doesn't contain proper depot backslashes and it might cause issues!\n", tmp.c_str());
-	}
-	else if(splitpos > 0)
-	{
-		tmp = tmp.substr(splitpos, tmp.length() - splitpos);
-	}
-
-	return tmp;
-}
-
 std::string StringUtil::TrimEnd(const std::string &str, char c)
 {
 	std::string::size_type i1 = str.length() - 1;

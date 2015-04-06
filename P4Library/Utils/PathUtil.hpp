@@ -10,6 +10,8 @@ public:
 
 	//static std::string WorkspaceToDepot(const std::string &root, const std::string &workspacePath);
 
+	static std::string parseDepotPathFromString(const std::string &from);
+
 	static void ConvertToForwardSlashes(std::string &path);
 
 	static bool IsValidDepotPath(const std::string &path);

@@ -29,3 +29,11 @@
 
 *.opensdf
 *.sdf
+
+*.ilk
+*.pdb
+*.tlog
+*.lastbuildstate
+*.suo
+*.idb
+*CppClean.log

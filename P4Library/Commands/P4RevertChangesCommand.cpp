@@ -2,6 +2,7 @@
 #include "P4RevertChangesCommand.hpp"
 
 #include "../Utils/StringUtil.hpp"
+#include "../Utils/PathUtil.hpp"
 
 #include <sstream>
 
@@ -13,6 +14,7 @@ namespace VersionControl
 	static const char* g_WasDeletedReverted = "was delete, reverted";
 	static const char* g_WasDeletedMovedReverted = "was move/delete, reverted";
 	static const char* g_WasDeletedAddDeleted = "was move/add, deleted";
+	static const char* g_WasEditUnlockedAndReverted = "was edit, unlocked and reverted";	
 
 	P4RevertChangesCommand::P4RevertChangesCommand(std::string changelist, bool onlyUnchanged) : 
 		P4Command("revert"),
@@ -55,7 +57,7 @@ namespace VersionControl
 		std::string line;
 		while(std::getline(stream, line))
 		{
-			std::string depotFilename = StringUtil::parseDepotFilename(line);
+			std::string depotFilename = PathUtil::parseDepotPathFromString(line);
 			m_files[depotFilename] = MessageToAddResult(line);
 		}
 	}
@@ -66,7 +68,8 @@ namespace VersionControl
 			StringUtil::endsWith(message, g_WasAddAbandoned) ||
 			StringUtil::endsWith(message, g_WasDeletedReverted) ||
 			StringUtil::endsWith(message, g_WasDeletedMovedReverted) || 
-			StringUtil::endsWith(message, g_HasBeenMovedNotReverted))
+			StringUtil::endsWith(message, g_HasBeenMovedNotReverted) ||
+			StringUtil::endsWith(message, g_WasEditUnlockedAndReverted))
 		{
 			return P4RevertResult::Reverted;
 		}

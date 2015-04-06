@@ -2,6 +2,7 @@
 #include "P4EditCommand.hpp"
 
 #include "../Utils/StringUtil.hpp"
+#include "../Utils/PathUtil.hpp"
 
 #include <sstream>
 
@@ -53,7 +54,7 @@ namespace VersionControl
 			if(m_reportOnlyEdited && result != P4EditResult::OpenedForEdit)
 				continue;
 
-			std::string depotFilename = StringUtil::parseDepotFilename(line);
+			std::string depotFilename = PathUtil::parseDepotPathFromString(line);
 			m_files[depotFilename] = result;
 		}
 	}

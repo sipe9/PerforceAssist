@@ -158,6 +158,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Commands\P4AddCommand.cpp" />
+    <ClCompile Include="Commands\P4LockCommand.cpp" />
     <ClCompile Include="Commands\P4OpenedCommand.cpp" />
     <ClCompile Include="Commands\P4RevertChangesCommand.cpp" />
     <ClCompile Include="Commands\P4SyncCommand.cpp" />
@@ -167,6 +168,7 @@
     <ClCompile Include="Commands\P4InfoCommand.cpp" />
     <ClCompile Include="Commands\P4PendingChangelistCommand.cpp" />
     <ClCompile Include="Commands\P4StatusCommand.cpp" />
+    <ClCompile Include="Commands\P4UnlockCommand.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="P4Task.cpp" />
     <ClCompile Include="Utils\PathUtil.cpp" />
@@ -174,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Commands\P4AddCommand.hpp" />
+    <ClInclude Include="Commands\P4LockCommand.hpp" />
     <ClInclude Include="Commands\P4OpenedCommand.hpp" />
     <ClInclude Include="Commands\P4RevertChangesCommand.hpp" />
     <ClInclude Include="Commands\P4SyncCommand.hpp" />
@@ -183,6 +186,7 @@
     <ClInclude Include="Commands\P4InfoCommand.hpp" />
     <ClInclude Include="Commands\P4PendingChangelistCommand.hpp" />
     <ClInclude Include="Commands\P4StatusCommand.hpp" />
+    <ClInclude Include="Commands\P4UnlockCommand.hpp" />
     <ClInclude Include="P4Task.hpp" />
     <ClInclude Include="Utils\PathUtil.hpp" />
     <ClInclude Include="Utils\StringUtil.hpp" />

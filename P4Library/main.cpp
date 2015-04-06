@@ -10,6 +10,8 @@
 #include "Commands/P4SyncCommand.hpp"
 #include "Commands/P4RevertChangesCommand.hpp"
 #include "Commands/P4OpenedCommand.hpp"
+#include "Commands/P4LockCommand.hpp"
+#include "Commands/P4UnlockCommand.hpp"
 
 #include "Utils/PathUtil.hpp"
 
@@ -47,15 +49,31 @@ void P4Test(P4Task &task)
 	sync.AddPath("//data/...");
 	task.runCommand(&sync, CommandArgs());*/
 
-	P4OpenedCommand opened("28", "");
+	P4OpenedCommand opened("29", "");
 	task.runCommand(&opened, CommandArgs());
 
-	P4RevertChangesCommand revert("28", false);
+	P4RevertChangesCommand revert("29", false);
 	for(auto &tmp : opened.GetOpenedFiles())
 	{
 		revert.AddPath(tmp.first);
 	}
 	task.runCommand(&revert, CommandArgs());
+
+	//P4LockCommand lock;
+	/*for(auto &tmp : opened.GetOpenedFiles())
+	{
+		lock.AddPath(tmp.first);
+	}*/
+	//lock.AddPath("//data/test/...");
+	//task.runCommand(&lock, CommandArgs());
+
+	//P4UnlockCommand unlock;
+	/*for(auto &tmp : opened.GetOpenedFiles())
+	{
+		unlock.AddPath(tmp.first);
+	}*/
+	//unlock.AddPath("//data/test/...");
+	//task.runCommand(&unlock, CommandArgs());
 }
 
 void main()

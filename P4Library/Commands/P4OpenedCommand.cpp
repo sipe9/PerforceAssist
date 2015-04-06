@@ -2,6 +2,7 @@
 #include "P4OpenedCommand.hpp"
 
 #include "../Utils/StringUtil.hpp"
+#include "../Utils/PathUtil.hpp"
 
 #include <sstream>
 
@@ -55,7 +56,7 @@ namespace VersionControl
 		std::string line;
 		while(std::getline(stream, line))
 		{
-			std::string depotFilename = StringUtil::parseDepotFilename(line);
+			std::string depotFilename = PathUtil::parseDepotPathFromString(line);
 			m_openedFiles[depotFilename] = MessageToAddResult(line);
 		}
 	}

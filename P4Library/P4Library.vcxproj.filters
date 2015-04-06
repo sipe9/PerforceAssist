@@ -41,6 +41,12 @@
     <ClCompile Include="Utils\StringUtil.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Commands\P4LockCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\P4UnlockCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Commands\P4SyncCommand.hpp">
@@ -81,6 +87,12 @@
     </ClInclude>
     <ClInclude Include="Utils\StringUtil.hpp">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\P4LockCommand.hpp">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\P4UnlockCommand.hpp">
+      <Filter>Commands</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
