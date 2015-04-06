@@ -124,3 +124,20 @@ bool StringUtil::IsPositiveNumber(const std::string &s)
 {
 	return !s.empty() && std::all_of(s.begin(), s.end(), ::isdigit);
 }
+
+bool StringUtil::startsWithAndAssign(const std::string &line, const char *prefix, std::string &dest, bool trim)
+{
+	if (StringUtil::startsWith(line, prefix))
+	{
+		dest = line.substr(strlen(prefix));
+
+		if(trim)
+		{
+			dest = TrimStart(dest, ' ');
+			dest = TrimStart(dest, '\t');
+		}
+
+		return true;
+	}
+	return false;
+}

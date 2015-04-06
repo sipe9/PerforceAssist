@@ -12,6 +12,7 @@
 #include "Commands/P4OpenedCommand.hpp"
 #include "Commands/P4LockCommand.hpp"
 #include "Commands/P4UnlockCommand.hpp"
+#include "Commands/P4ClientCommand.hpp"
 
 #include "Utils/PathUtil.hpp"
 
@@ -49,7 +50,7 @@ void P4Test(P4Task &task)
 	sync.AddPath("//data/...");
 	task.runCommand(&sync, CommandArgs());*/
 
-	P4OpenedCommand opened("29", "");
+	/*P4OpenedCommand opened("29", "");
 	task.runCommand(&opened, CommandArgs());
 
 	P4RevertChangesCommand revert(false);
@@ -57,7 +58,7 @@ void P4Test(P4Task &task)
 	{
 		revert.AddPath(tmp.first);
 	}
-	task.runCommand(&revert, CommandArgs());
+	task.runCommand(&revert, CommandArgs());*/
 
 	//P4LockCommand lock;
 	/*for(auto &tmp : opened.GetOpenedFiles())
@@ -74,6 +75,9 @@ void P4Test(P4Task &task)
 	}*/
 	//unlock.AddPath("//data/test/...");
 	//task.runCommand(&unlock, CommandArgs());
+
+	P4ClientCommand client(g_workspace);
+	task.runCommand(&client, CommandArgs());
 }
 
 void main()

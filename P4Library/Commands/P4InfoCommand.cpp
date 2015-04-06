@@ -30,53 +30,43 @@ namespace VersionControl
 		return task.runP4Command("info", args, this);
 	}
 
-	bool ParseInfo(const std::string &line, const char *prefix, std::string &dest)
-	{
-		if (StringUtil::startsWith(line, prefix))
-		{
-			dest = line.substr(strlen(prefix));
-			return true;
-		}
-		return false;
-	}
-
 	void P4InfoCommand::OutputInfo(char level, const char *data)
 	{
 		std::stringstream stream(data);
 		std::string line;
 		while(std::getline(stream, line))
-		{
-			if (ParseInfo(line, g_ClientName, m_info.clientName)) 
+		{			
+			if (StringUtil::startsWithAndAssign(line, g_ClientName, m_info.clientName)) 
 				continue;
 
-			if (ParseInfo(line, g_ClientHost, m_info.clientHost)) 
+			if (StringUtil::startsWithAndAssign(line, g_ClientHost, m_info.clientHost)) 
 				continue;
 
-			if (ParseInfo(line, g_ClientRoot, m_info.clientRoot)) 
+			if (StringUtil::startsWithAndAssign(line, g_ClientRoot, m_info.clientRoot)) 
 				continue;
 
-			if (ParseInfo(line, g_CurrentDir, m_info.currentDir)) 
+			if (StringUtil::startsWithAndAssign(line, g_CurrentDir, m_info.currentDir)) 
 				continue;
 
-			if (ParseInfo(line, g_PeerAddr, m_info.peerAddress)) 
+			if (StringUtil::startsWithAndAssign(line, g_PeerAddr, m_info.peerAddress)) 
 				continue;
 
-			if (ParseInfo(line, g_ClientAddr, m_info.clientAddress)) 
+			if (StringUtil::startsWithAndAssign(line, g_ClientAddr, m_info.clientAddress)) 
 				continue;
 
-			if (ParseInfo(line, g_ServerAddr, m_info.serverAddress)) 
+			if (StringUtil::startsWithAndAssign(line, g_ServerAddr, m_info.serverAddress)) 
 				continue;
 
-			if (ParseInfo(line, g_ServerRoot, m_info.serverRoot)) 
+			if (StringUtil::startsWithAndAssign(line, g_ServerRoot, m_info.serverRoot)) 
 				continue;
 
-			if (ParseInfo(line, g_ServerVersion, m_info.serverVersion)) 
+			if (StringUtil::startsWithAndAssign(line, g_ServerVersion, m_info.serverVersion)) 
 				continue;
 
-			if (ParseInfo(line, g_ServerLicense, m_info.serverLicense)) 
+			if (StringUtil::startsWithAndAssign(line, g_ServerLicense, m_info.serverLicense)) 
 				continue;
 
-			if (ParseInfo(line, g_CaseHandling, m_info.caseHandling)) 
+			if (StringUtil::startsWithAndAssign(line, g_CaseHandling, m_info.caseHandling)) 
 				continue;
 
 			if (StringUtil::startsWith(line, g_ClientUnknown)) 
