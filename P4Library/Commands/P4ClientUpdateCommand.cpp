@@ -91,7 +91,7 @@ namespace VersionControl
 		buffer += g_Description;
 		buffer += '\n';
 
-		for(auto &descLine : clientData.descriptionLines)
+		for(auto &descLine : clientData.description)
 		{
 			buffer += '\t';
 			buffer += descLine;

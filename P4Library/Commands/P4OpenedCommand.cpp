@@ -13,11 +13,11 @@ namespace VersionControl
 	static const char* g_openedForAdd = "- add change";
 	static const char* g_openedForMoveDelete = "- move/delete change";
 	static const char* g_openedForMoveAdd = "- move/add change";
+	static const char* g_openedForEditDefault = "- edit default";	
+	static const char* g_openedForAddDefault = "- add default";	
 
-	P4OpenedCommand::P4OpenedCommand(std::string changelist, std::string workspace) : 
-		P4Command("opened"),
-		m_changelist(changelist),
-		m_workspace(workspace)
+	P4OpenedCommand::P4OpenedCommand() : 
+		P4Command("opened")
 	{
 	}
 
@@ -25,17 +25,20 @@ namespace VersionControl
 	{
 		CommandArgs myArgs;
 
-		// Append changelist if available
-		if(!m_changelist.empty())
+		if(m_openedType == P4OpenedCommandType::Changelist && !m_changelist.empty())
 		{
 			myArgs.emplace_back("-c");
 			myArgs.emplace_back(m_changelist);
 		}
-		// Append workspace
-		else if(!m_workspace.empty())
+		else if(m_openedType == P4OpenedCommandType::Workspace && !m_workspace.empty())
 		{
 			myArgs.emplace_back("-C");
 			myArgs.emplace_back(m_workspace);
+		}
+		else
+		{
+			printf("P4OpenCommand failed. SetChangelist() or SetWorkspace() must be called before running command!\n");
+			return false;
 		}
 
 		// Append custom arguments
@@ -73,10 +76,26 @@ namespace VersionControl
 			return P4OpenedResult::OpenedForMoveDelete;
 		else if(StringUtil::Contains(message, g_openedForMoveAdd))
 			return P4OpenedResult::OpenedForMoveAdd;
+		else if(StringUtil::Contains(message, g_openedForEditDefault))
+			return P4OpenedResult::OpenedForEditDefualt;
+		else if(StringUtil::Contains(message, g_openedForAddDefault))
+			return P4OpenedResult::OpenedForAddDefualt;
 		else
 		{
 			printf("Failed to parse P4OpenedResult from %s\n", message.c_str());
 			return P4OpenedResult::Unknown;
 		}
+	}
+
+	void P4OpenedCommand::SetChangelist(const std::string &changelist)
+	{
+		m_openedType = P4OpenedCommandType::Changelist;
+		m_changelist = changelist;
+	}
+
+	void P4OpenedCommand::SetWorkspace(const std::string &workspace)
+	{
+		m_openedType = P4OpenedCommandType::Workspace;
+		m_workspace = workspace;
 	}
 }

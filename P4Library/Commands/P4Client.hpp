@@ -13,7 +13,7 @@ namespace VersionControl
 		std::string		access;
 		std::string		owner;
 		std::string		host;
-		std::vector<std::string>		descriptionLines;
+		std::vector<std::string>		description;
 		std::string		root;
 
 		std::vector<std::string>		options;

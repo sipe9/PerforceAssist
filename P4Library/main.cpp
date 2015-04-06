@@ -14,6 +14,10 @@
 #include "Commands/P4UnlockCommand.hpp"
 #include "Commands/P4ClientCommand.hpp"
 #include "Commands/P4ClientUpdateCommand.hpp"
+#include "Commands/P4DepotCommand.hpp"
+#include "Commands/P4ChangelistCommand.hpp"
+#include "Commands/P4ChangeUpdateCommand.hpp"
+#include "Commands/P4DeleteChangelistCommand.hpp"
 
 #include "Utils/PathUtil.hpp"
 
@@ -26,6 +30,7 @@ std::string g_password = "";
 std::string g_workspace = "TestWorkSpace";
 //std::string g_host = "localhost:1666";
 std::string g_host = "Sami";
+std::string g_depot = "data";
 
 void P4Test(P4Task &task)
 {
@@ -41,7 +46,7 @@ void P4Test(P4Task &task)
 	edit.AddPath("//data/...");
 	task.runCommand(&edit, CommandArgs());*/
 
-	/*P4NewChangelistCommand change(workspace, username, "New changelist");
+	/*P4NewChangelistCommand change(workspace, username, "New change list");
 	task.runCommand(&change, CommandArgs());*/
 
 	/*P4ChangesCommand pending(g_username);
@@ -51,10 +56,11 @@ void P4Test(P4Task &task)
 	sync.AddPath("//data/...");
 	task.runCommand(&sync, CommandArgs());*/
 
-	/*P4OpenedCommand opened("29", "");
-	task.runCommand(&opened, CommandArgs());
+	/*P4OpenedCommand opened;
+	opened.SetChangelist("29");
+	task.runCommand(&opened, CommandArgs());*/
 
-	P4RevertChangesCommand revert(false);
+	/*P4RevertChangesCommand revert(false);
 	for(auto &tmp : opened.GetOpenedFiles())
 	{
 		revert.AddPath(tmp.first);
@@ -77,14 +83,35 @@ void P4Test(P4Task &task)
 	//unlock.AddPath("//data/test/...");
 	//task.runCommand(&unlock, CommandArgs());
 
-	P4ClientCommand client(g_workspace);
+	/*P4ClientCommand client(g_workspace);
 	task.runCommand(&client, CommandArgs());
 
 	P4ClientData data = client.GetClientData();
 	data.view.emplace_back("-//data/.../*.zip //TestWorkSpace/data/.../*.zip");
 
 	P4ClientUpdateCommand clientUpdate(data);
-	task.runCommand(&clientUpdate, CommandArgs());
+	task.runCommand(&clientUpdate, CommandArgs());*/
+
+	/*P4DepotCommand depot(g_depot);
+	task.runCommand(&depot, CommandArgs());*/
+
+	/*P4ChangelistCommand cl("default");
+	task.runCommand(&cl, CommandArgs());*/
+
+	/*P4ChangeData clData = cl.GetChangeDate();
+	clData.description.clear();
+	clData.description.emplace_back("Wuuhuu, new changelist desc!");
+	clData.description.emplace_back("Second line!");
+
+	P4ChangeUpdateCommand clUpdate(clData);
+	task.runCommand(&clUpdate, CommandArgs());*/
+
+	/*P4DeleteChangelistCommand deleteCL("31");
+	task.runCommand(&deleteCL, CommandArgs());*/
+
+	/*P4OpenedCommand opened;
+	opened.SetChangelist("default");
+	task.runCommand(&opened, CommandArgs());*/
 }
 
 void main()

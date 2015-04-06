@@ -7,23 +7,23 @@
 
 namespace VersionControl
 {
-	class P4ChangesCommand : public P4Command
+	class P4ChangelistCommand : public P4Command
 	{
 
 	public:		
 
-		P4ChangesCommand(const std::string &user);
+		P4ChangelistCommand(const std::string &changelist);
 
 		virtual bool Run(P4Task &task, const CommandArgs &args);
 
 		void OutputInfo(char level, const char *data);		
 
-		const std::vector<P4ChangeData> &GetChanges() const { return m_changes; }
+		const P4ChangeData &GetChangeDate() const { return m_changeData; }
 
 	private:
 		
-		std::string		m_user;
+		std::string		m_changelist;
 
-		std::vector<P4ChangeData> m_changes;
+		P4ChangeData	m_changeData;
 	};
 }

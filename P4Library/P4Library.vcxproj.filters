@@ -14,9 +14,6 @@
     <ClCompile Include="Commands\P4InfoCommand.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
-    <ClCompile Include="Commands\P4NewChangelistCommand.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
     <ClCompile Include="Commands\P4OpenedCommand.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
@@ -53,6 +50,21 @@
     <ClCompile Include="Commands\P4ClientUpdateCommand.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
+    <ClCompile Include="Commands\P4DepotCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\P4ChangeUpdateCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\P4NewChangelistCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\P4ChangelistCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\P4DeleteChangelistCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Commands\P4SyncCommand.hpp">
@@ -68,9 +80,6 @@
       <Filter>Commands</Filter>
     </ClInclude>
     <ClInclude Include="Commands\P4InfoCommand.hpp">
-      <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="Commands\P4NewChangelistCommand.hpp">
       <Filter>Commands</Filter>
     </ClInclude>
     <ClInclude Include="Commands\P4OpenedCommand.hpp">
@@ -107,6 +116,27 @@
       <Filter>Commands</Filter>
     </ClInclude>
     <ClInclude Include="Commands\P4Client.hpp">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\P4DepotCommand.hpp">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\P4Depot.hpp">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\P4ChangeUpdateCommand.hpp">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\P4Change.hpp">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\P4NewChangelistCommand.hpp">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\P4ChangelistCommand.hpp">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\P4DeleteChangelistCommand.hpp">
       <Filter>Commands</Filter>
     </ClInclude>
   </ItemGroup>

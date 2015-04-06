@@ -78,7 +78,7 @@ namespace VersionControl
 					descLine = StringUtil::TrimStart(descLine, ' ');
 					descLine = StringUtil::TrimStart(descLine, '\t');
 
-					m_clientResult.descriptionLines.emplace_back(descLine);
+					m_clientResult.description.emplace_back(descLine);
 
 					i++;
 

@@ -50,8 +50,8 @@ namespace VersionControl
 					split[2] == g_Pending2 && 
 					split[4] == g_Pending4)
 				{
-					P4ChangesResult result;
-					result.changelist = split[1];
+					P4ChangeData result;
+					result.change = split[1];
 					result.creationtime = split[3];										
 					result.user = split[5];
 					result.status = StringUtil::Trim(split[6], '*');
@@ -61,7 +61,7 @@ namespace VersionControl
 					desc = StringUtil::SplitByFirstOf(desc, '\'', false);
 					desc = StringUtil::Trim(desc, '\'');
 
-					result.description = desc;
+					result.description.emplace_back(desc);
 
 					m_changes.emplace_back(result);
 				}				
