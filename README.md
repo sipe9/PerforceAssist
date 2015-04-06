@@ -1,6 +1,13 @@
 # PerforceAssist
 Perforce Assist wraps common Perforce commands with simple API interface
 
+Fully written in C++ and using standard libraries such as std::string and std::vector. Currently assumes windows as target, shouldn't be an issue to make it work on other platforms.
+
+Using P4 C++ API:
+RELEASE = 2015 1;
+PATCHLEVEL = 1028542;
+SUPPDATE = 2015/03/20;
+
 ## How to usage PerforceAssist
 
 First create instance of P4Task, set parameters and connect to P4 with connect();
