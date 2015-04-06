@@ -103,18 +103,45 @@ http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_unlock.html
 	unlock.AddPath("//data/test/...");
 	task.runCommand(&unlock, CommandArgs());
 	
-## Combinations
+## Examples
 
-#### Revert all of the files in specific changelist
+#### Example of reverting all of the files in specific changelist
 
 This requires two commands, first get list of opened files from changelist and then feed this result to revert command.
 
-	P4OpenedCommand opened("29", "");
-	task.runCommand(&opened, CommandArgs());
+	#include "P4Task.hpp"
+	#include "Commands/P4OpenedCommand.hpp"
+	#include "Commands/P4RevertChangesCommand.hpp"
 	
-	P4RevertChangesCommand revert(false);
-	for(auto &tmp : opened.GetOpenedFiles())
+	using namespace VersionControl;
+	
+	void main()
 	{
-		revert.AddPath(tmp.first);
+		// Create P4 tasks, this is used to connect to server and executa commands
+		P4Task task;
+		
+		// Set P4 tasks client
+		task.setP4Client("myworkspacename");
+		
+		// Connect to P4 server
+		task.connect("myusername", "mypassword", "localhost:1666");
+		
+		// Create opened command with changelist number.
+		// Second argument is empty, it's for getting all of the opened files from client
+		std::string changelist = "29";
+		P4OpenedCommand opened(changelist, "");
+		
+		// Run opened command without additonal arguments
+		task.runCommand(&opened, CommandArgs());
+		
+		P4RevertChangesCommand revert(false);
+		
+		// Put all of the open files to our revert command
+		for(auto &tmp : opened.GetOpenedFiles())
+		{
+			revert.AddPath(tmp.first);
+		}
+		
+		// Run revert command without additional arguments
+		task.runCommand(&revert, CommandArgs());
 	}
-	task.runCommand(&revert, CommandArgs());
