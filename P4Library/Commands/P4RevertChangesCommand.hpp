@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include "../P4Task.hpp"
@@ -8,35 +7,34 @@
 
 namespace VersionControl
 {
-	enum class P4RevertResult : int
-	{
-		Reverted = 0,
-		Deleted,
-		Unknown,
-	};
+    enum class P4RevertResult : int
+    {
+        Reverted = 0,
+        Deleted,
+        Unknown,
+    };
 
-	class P4RevertChangesCommand : public P4Command
-	{
+    class P4RevertChangesCommand : public P4Command
+    {
+    public:
 
-	public:		
+        P4RevertChangesCommand(bool onlyUnchanged);
 
-		P4RevertChangesCommand(bool onlyUnchanged);
+        virtual bool Run(P4Task &task);
 
-		virtual bool Run(P4Task &task, const CommandArgs &args);
+        void OutputInfo(char level, const char *data);
 
-		void OutputInfo(char level, const char *data);
+        const std::unordered_map<std::string, P4RevertResult> &GetFiles() const { return m_files; }
 
-		const std::unordered_map<std::string, P4RevertResult> &GetFiles() const { return m_files; }
+        P4RevertResult MessageToAddResult(const std::string &message);
 
-		P4RevertResult MessageToAddResult(const std::string &message);
+        void SetChangelist(const std::string &changelist) { m_changelist = changelist; }
 
-		void SetChangelist(const std::string &changelist) { m_changelist = changelist; }
-		
-	private:
+    private:
 
-		std::string		m_changelist;
-		bool			m_onlyUnchanged;
+        std::string		m_changelist;
+        bool			m_onlyUnchanged;
 
-		std::unordered_map<std::string, P4RevertResult>	m_files;	
-	};
+        std::unordered_map<std::string, P4RevertResult>	m_files;
+    };
 }

@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include "../P4Task.hpp"
@@ -8,33 +7,30 @@
 
 namespace VersionControl
 {
-	enum class P4SyncResult : int
-	{
-		Updating = 0,
-		Unknown,
-	};
+    enum class P4SyncResult : int
+    {
+        Updating = 0,
+        Unknown,
+    };
 
-	class P4SyncCommand : public P4Command
-	{
+    class P4SyncCommand : public P4Command
+    {
+    public:
 
-	public:		
+        P4SyncCommand(bool forceSync = false);
 
-		P4SyncCommand(bool forceSync = false);
+        virtual bool Run(P4Task &task);
 
-		virtual bool Run(P4Task &task, const CommandArgs &args);
+        void OutputInfo(char level, const char *data);
 
-		void OutputInfo(char level, const char *data);
+        const std::unordered_map<std::string, P4SyncResult> &GetSyncedFiles() const { return m_syncedFiles; }
 
-		const std::unordered_map<std::string, P4SyncResult> &GetSyncedFiles() const { return m_syncedFiles; }
+    private:
 
-	private:
+        P4SyncResult ParseResultFromMessage(const std::string &message);
 
-		P4SyncResult ParseResultFromMessage(const std::string &message);
-		
-	private:
+        std::unordered_map<std::string, P4SyncResult>	m_syncedFiles;
 
-		std::unordered_map<std::string, P4SyncResult>	m_syncedFiles;
-		
-		bool						m_forceSync;
-	};
+        bool						m_forceSync;
+    };
 }

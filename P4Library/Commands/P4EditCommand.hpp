@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include "../P4Task.hpp"
@@ -8,34 +7,33 @@
 
 namespace VersionControl
 {
-	enum class P4EditResult : int
-	{
-		OpenedForEdit = 0,
-		AlreadyOpenedForAdd,
-		AlreadyOpenedForEdit,
-		AlsoOpenedBy,
-		Unknown,
-	};
+    enum class P4EditResult : int
+    {
+        OpenedForEdit = 0,
+        AlreadyOpenedForAdd,
+        AlreadyOpenedForEdit,
+        AlsoOpenedBy,
+        Unknown,
+    };
 
-	class P4EditCommand : public P4Command
-	{
+    class P4EditCommand : public P4Command
+    {
+    public:
 
-	public:		
+        P4EditCommand(std::string changelist = "");
 
-		P4EditCommand(std::string changelist = "");
+        virtual bool Run(P4Task &task);
 
-		virtual bool Run(P4Task &task, const CommandArgs &args);
+        void OutputInfo(char level, const char *data);
 
-		void OutputInfo(char level, const char *data);
+        const std::unordered_map<std::string, P4EditResult> &GetFiles() const { return m_files; }
 
-		const std::unordered_map<std::string, P4EditResult> &GetFiles() const { return m_files; }
+        P4EditResult MessageToAddResult(const std::string &message);
 
-		P4EditResult MessageToAddResult(const std::string &message);
-		
-	private:
+    private:
 
-		std::string		m_changelist;
+        std::string		m_changelist;
 
-		std::unordered_map<std::string, P4EditResult>	m_files;	
-	};
+        std::unordered_map<std::string, P4EditResult>	m_files;
+    };
 }

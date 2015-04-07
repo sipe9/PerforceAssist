@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include "../P4Task.hpp"
@@ -9,23 +8,22 @@
 
 namespace VersionControl
 {
-	class P4DepotCommand : public P4Command
-	{
+    class P4DepotCommand : public P4Command
+    {
+    public:
 
-	public:		
+        P4DepotCommand(const std::string &depotName);
 
-		P4DepotCommand(const std::string &depotName);
+        virtual bool Run(P4Task &task);
 
-		virtual bool Run(P4Task &task, const CommandArgs &args);
+        void OutputInfo(char level, const char *data);
 
-		void OutputInfo(char level, const char *data);		
+        const P4DepotData &GetDepotData() const { return m_depotData; }
 
-		const P4DepotData &GetDepotData() const { return m_depotData; }
+    private:
 
-	private:
-		
-		std::string		m_depotName;
+        std::string		m_depotName;
 
-		P4DepotData		m_depotData;
-	};
+        P4DepotData		m_depotData;
+    };
 }

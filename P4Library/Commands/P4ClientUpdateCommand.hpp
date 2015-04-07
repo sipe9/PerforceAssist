@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include "../P4Task.hpp"
@@ -9,27 +8,26 @@
 
 namespace VersionControl
 {
-	class P4ClientUpdateCommand : public P4Command
-	{
+    class P4ClientUpdateCommand : public P4Command
+    {
+    public:
 
-	public:		
+        P4ClientUpdateCommand(const P4ClientData &clientData);
 
-		P4ClientUpdateCommand(const P4ClientData &clientData);
+        virtual bool Run(P4Task &task);
 
-		virtual bool Run(P4Task &task, const CommandArgs &args);
+        void OutputInfo(char level, const char *data);
 
-		void OutputInfo(char level, const char *data);		
+        virtual void InputData(StrBuf *strbuf, Error *e);
 
-		virtual void InputData(StrBuf *strbuf, Error *e);
+    private:
 
-	private:
+        static std::string CreateClientInputBuffer(const P4ClientData &clientData);
 
-		static std::string CreateClientInputBuffer(const P4ClientData &clientData);
+    private:
 
-	private:
+        bool			m_clientUpdated;
 
-		bool			m_clientUpdated;
-		
-		P4ClientData	m_clientData;
-	};
+        P4ClientData	m_clientData;
+    };
 }

@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include "../P4Task.hpp"
@@ -8,31 +7,30 @@
 
 namespace VersionControl
 {
-	enum class P4LockResult : int
-	{
-		Locked = 0,
-		Failed,
-		AlreadyLocked,
-		Unknown
-	};
+    enum class P4LockResult : int
+    {
+        Locked = 0,
+        Failed,
+        AlreadyLocked,
+        Unknown
+    };
 
-	class P4LockCommand : public P4Command
-	{
+    class P4LockCommand : public P4Command
+    {
+    public:
 
-	public:		
+        P4LockCommand();
 
-		P4LockCommand();
+        virtual bool Run(P4Task &task);
 
-		virtual bool Run(P4Task &task, const CommandArgs &args);
+        void OutputInfo(char level, const char *data);
 
-		void OutputInfo(char level, const char *data);
+        const std::unordered_map<std::string, P4LockResult> &GetLockedFiles() const { return m_lockedFiles; }
 
-		const std::unordered_map<std::string, P4LockResult> &GetLockedFiles() const { return m_lockedFiles; }
+    private:
 
-	private:
+        P4LockResult MessageToAddResult(const std::string &message);
 
-		P4LockResult MessageToAddResult(const std::string &message);
-
-		std::unordered_map<std::string, P4LockResult>	m_lockedFiles;
-	};
+        std::unordered_map<std::string, P4LockResult>	m_lockedFiles;
+    };
 }

@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include "../P4Task.hpp"
@@ -6,22 +5,21 @@
 
 namespace VersionControl
 {
-	class P4DeleteChangelistCommand : public P4Command
-	{
+    class P4DeleteChangelistCommand : public P4Command
+    {
+    public:
 
-	public:		
+        P4DeleteChangelistCommand(const std::string &changelist);
 
-		P4DeleteChangelistCommand(const std::string &changelist);
+        virtual bool Run(P4Task &task);
 
-		virtual bool Run(P4Task &task, const CommandArgs &args);
+        void OutputInfo(char level, const char *data);
 
-		void OutputInfo(char level, const char *data);		
+        bool isDeleted() { m_isDeleted; }
 
-		bool isDeleted() { m_isDeleted; }
+    private:
 
-	private:
-		
-		std::string		m_changelist;
-		bool			m_isDeleted;
-	};
+        std::string		m_changelist;
+        bool			m_isDeleted;
+    };
 }
