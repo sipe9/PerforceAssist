@@ -4,8 +4,6 @@
  * This file is part of Perforce - the FAST SCM System.
  */
 
-#pragma once
-
 /*
  * StrBuf.h - multipurpose buffers
  *

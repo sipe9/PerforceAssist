@@ -12,6 +12,8 @@
  * save string space across files.
  */
 
+#pragma once
+
 struct P4Tag {
 
 	// protocol levels

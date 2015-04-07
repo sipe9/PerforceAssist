@@ -12,6 +12,11 @@
 
 #include <algorithm>
 
+static char* g_programName = "VersionControl";
+static int g_programVersionMajor = 0;
+static int g_programVersionMinor = 5;
+static int g_programVersionPatch = 0;
+
 namespace VersionControl
 {
 	P4Task::P4Task() :
@@ -127,12 +132,12 @@ namespace VersionControl
 		return true;
 	}
 
-	bool P4Task::runCommand(P4Command *cmd, const CommandArgs &args)
+	bool P4Task::runCommand(P4Command &cmd, const CommandArgs &args)
 	{
-		return cmd->Run(*this, args);
+		return cmd.Run(*this, args);
 	}
 
-	bool P4Task::connect(const std::string &user, const std::string &password, const std::string &host)
+	bool P4Task::connect(const std::string &user, const std::string &password)
 	{
 		if(isConnected())
 		{
@@ -141,10 +146,15 @@ namespace VersionControl
 
 		setP4User(user);
 		setP4Password(password);
-		setP4Host(host);
 		
-		m_client.SetProg("VersionControl");
-		m_client.SetVersion("1.0");
+		m_client.SetProg(g_programName);
+
+		std::string progVersion =
+			std::to_string(g_programVersionMajor) + "." +
+			std::to_string(g_programVersionMinor) + "." +
+			std::to_string(g_programVersionPatch);
+
+		m_client.SetVersion(progVersion.c_str());
 		m_client.SetVar("enableStreams");
 		m_client.SetProtocol("enableStreams", "");
 
@@ -153,7 +163,7 @@ namespace VersionControl
 
 		if(err.Test())
 		{
-			printf("Failed to connect %s!\n", host.c_str());
+			printf("Failed to connect %s!\n", m_portConfig.c_str());
 			return false;
 		}		
 
@@ -173,7 +183,11 @@ namespace VersionControl
 
 		if(m_needsConnectionRefresh)
 		{
-			// todo: refresh connection!
+			if (!connect(m_userConfig, m_passwordConfig))
+			{
+				printf("P4 connection has dropped and couldn't reconnect!\n");
+				return false;
+			}
 		}
 
 		std::vector<char*> argBuffer;

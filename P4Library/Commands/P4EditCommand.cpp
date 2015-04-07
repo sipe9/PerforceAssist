@@ -13,10 +13,9 @@ namespace VersionControl
 	static const char* g_AlreadyOpenedForEdit = "currently opened for edit";
 	static const char* g_AlsoOpenedBy = "also opened by";	
 
-	P4EditCommand::P4EditCommand(std::string changelist, bool reportOnlyEdited) : 
+	P4EditCommand::P4EditCommand(std::string changelist) : 
 		P4Command("edit"),
-		m_changelist(changelist),
-		m_reportOnlyEdited(reportOnlyEdited)
+		m_changelist(changelist)
 	{
 	}
 
@@ -49,13 +48,8 @@ namespace VersionControl
 		std::string line;
 		while(std::getline(stream, line))
 		{
-			P4EditResult result = MessageToAddResult(line);
-
-			if(m_reportOnlyEdited && result != P4EditResult::OpenedForEdit)
-				continue;
-
 			std::string depotFilename = PathUtil::parseDepotPathFromString(line);
-			m_files[depotFilename] = result;
+			m_files[depotFilename] = MessageToAddResult(line);
 		}
 	}
 

@@ -85,6 +85,8 @@
  *	
  */
 
+#pragma once
+
 class StrBuf;
 
 // On 64 bit platforms, the base 'size_t' type is 64 bits, which is much

@@ -21,6 +21,8 @@
  *         been terminated). 
  */
 
+#pragma once
+
 class KeepAlive {
 
     public:

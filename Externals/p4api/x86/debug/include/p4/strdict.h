@@ -15,6 +15,8 @@
  *
  */
 
+#pragma once
+
 class Error;
 
 class StrVarName : public StrRef {

@@ -17,12 +17,12 @@ namespace VersionControl
 		P4Task();
 		~P4Task();
 
-		bool				connect(const std::string &user, const std::string &password, const std::string &host);
+		bool				connect(const std::string &user, const std::string &password);
 		bool				disconnect();
 
 		bool				isConnected();	
 
-		bool				runCommand(P4Command *cmd, const CommandArgs &args);				
+		bool				runCommand(P4Command &cmd, const CommandArgs &args);				
 		bool				runP4Command(const std::string &cmd, const CommandArgs &args, P4Command *client);
 
 		std::string			getP4Port();

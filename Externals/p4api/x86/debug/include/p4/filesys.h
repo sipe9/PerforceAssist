@@ -73,6 +73,8 @@
  *	FileSys::CheckType() - look at the file and see if it is binary, etc
  */
 
+#pragma once
+
 # ifdef OS_NT
 # define DOUNICODE ( CharSetApi::isUnicode((CharSetApi::CharSet)GetCharSetPriv()) )
 # endif

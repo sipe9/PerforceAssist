@@ -1,18 +1,39 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "P4Library", "P4Library\P4Library.vcxproj", "{1623EA7D-8F5D-4009-9B3D-786FDA3191C7}"
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PerforceAssist", "P4Library\P4Library.vcxproj", "{1623EA7D-8F5D-4009-9B3D-786FDA3191C7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PerforceTest", "PerforceTest\PerforceTest.vcxproj", "{F7BF3BCF-7621-41CB-BD54-3D3072216E25}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1623EA7D-8F5D-4009-9B3D-786FDA3191C7} = {1623EA7D-8F5D-4009-9B3D-786FDA3191C7}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
 		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1623EA7D-8F5D-4009-9B3D-786FDA3191C7}.Debug|Win32.ActiveCfg = Debug|Win32
 		{1623EA7D-8F5D-4009-9B3D-786FDA3191C7}.Debug|Win32.Build.0 = Debug|Win32
+		{1623EA7D-8F5D-4009-9B3D-786FDA3191C7}.Debug|x64.ActiveCfg = Debug|x64
+		{1623EA7D-8F5D-4009-9B3D-786FDA3191C7}.Debug|x64.Build.0 = Debug|x64
 		{1623EA7D-8F5D-4009-9B3D-786FDA3191C7}.Release|Win32.ActiveCfg = Release|Win32
 		{1623EA7D-8F5D-4009-9B3D-786FDA3191C7}.Release|Win32.Build.0 = Release|Win32
+		{1623EA7D-8F5D-4009-9B3D-786FDA3191C7}.Release|x64.ActiveCfg = Release|x64
+		{1623EA7D-8F5D-4009-9B3D-786FDA3191C7}.Release|x64.Build.0 = Release|x64
+		{F7BF3BCF-7621-41CB-BD54-3D3072216E25}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F7BF3BCF-7621-41CB-BD54-3D3072216E25}.Debug|Win32.Build.0 = Debug|Win32
+		{F7BF3BCF-7621-41CB-BD54-3D3072216E25}.Debug|x64.ActiveCfg = Debug|x64
+		{F7BF3BCF-7621-41CB-BD54-3D3072216E25}.Debug|x64.Build.0 = Debug|x64
+		{F7BF3BCF-7621-41CB-BD54-3D3072216E25}.Release|Win32.ActiveCfg = Release|Win32
+		{F7BF3BCF-7621-41CB-BD54-3D3072216E25}.Release|Win32.Build.0 = Release|Win32
+		{F7BF3BCF-7621-41CB-BD54-3D3072216E25}.Release|x64.ActiveCfg = Release|x64
+		{F7BF3BCF-7621-41CB-BD54-3D3072216E25}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

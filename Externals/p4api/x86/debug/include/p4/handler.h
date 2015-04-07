@@ -25,6 +25,8 @@
  *			handlers.
  */
 
+#pragma once
+
 class LastChance;
 
 struct Handler {

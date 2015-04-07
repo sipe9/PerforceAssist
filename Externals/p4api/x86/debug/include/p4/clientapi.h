@@ -147,6 +147,8 @@
  *		Init() in order to take affect.
  */
 
+#pragma once
+
 class Client;
 class Ignore;
 

@@ -22,6 +22,8 @@
  *  header files.
  */
 
+#pragma once
+
 # ifdef OS_VMS
 # define _POSIX_EXIT  // to get exit status right from stdlib.h
 # endif	

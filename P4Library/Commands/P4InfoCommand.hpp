@@ -20,6 +20,9 @@ namespace VersionControl
 		std::string serverVersion;
 		std::string serverLicense;
 		std::string caseHandling; 
+		std::string username;
+		std::string serverDate;
+		std::string serverUptime;
 	};
 
 	class P4InfoCommand : public P4Command

@@ -100,7 +100,7 @@ void P4Test(P4Task &task)
 
 	/*P4ChangeData clData = cl.GetChangeDate();
 	clData.description.clear();
-	clData.description.emplace_back("Wuuhuu, new changelist desc!");
+	clData.description.emplace_back("Wuuhuu, new change list desc!");
 	clData.description.emplace_back("Second line!");
 
 	P4ChangeUpdateCommand clUpdate(clData);

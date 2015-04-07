@@ -22,7 +22,7 @@ namespace VersionControl
 
 	public:		
 
-		P4EditCommand(std::string changelist = "", bool reportOnlyEdited = true);
+		P4EditCommand(std::string changelist = "");
 
 		virtual bool Run(P4Task &task, const CommandArgs &args);
 
@@ -35,7 +35,6 @@ namespace VersionControl
 	private:
 
 		std::string		m_changelist;
-		bool			m_reportOnlyEdited;
 
 		std::unordered_map<std::string, P4EditResult>	m_files;	
 	};

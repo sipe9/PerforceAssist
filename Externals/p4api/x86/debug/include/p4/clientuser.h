@@ -98,6 +98,8 @@
  *	ClientUser::Finished() - called when tagged client call is finished.
  */
 
+#pragma once
+
 class Enviro;
 class ClientMerge;
 class ClientResolveA;
