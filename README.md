@@ -12,9 +12,16 @@ SUPPDATE = 2015/03/20;
 
 First create instance of P4Task, set parameters and connect to P4 with connect();
 
-	P4Task task;
-	task.setP4Client("TestWorkSpace");
-	task.connect("username", "password", "localhost:1666");
+    P4Task task;
+    task.setP4Client(g_workspaceName);
+    task.setP4Port(g_port);
+    task.setP4Host(g_host);
+
+    if(!task.connect(g_username, g_password))
+    {
+        printf("Failed to connect P4!\n");
+        return;
+    }
 	
 Then run commands with task.runCommand();
 
@@ -23,8 +30,9 @@ Then run commands with task.runCommand();
 
 http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_info.html
 
-	P4InfoCommand info("info");
-	task.runCommand(&info, CommandArgs());
+    P4InfoCommand info;
+    bool result = task.runCommand(info);
+    return result;
 
 #### Client
 
@@ -34,104 +42,123 @@ http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_info.html
 
 http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_client.html
 
-	P4ClientCommand client("TestWorkSpace");
-	task.runCommand(&client, CommandArgs());
+    P4ClientCommand client(g_workspaceName);
+    bool result = task.runCommand(client);
+    return result;
 	
 ##### Update client spec
 
-	// Get current spec
-	P4ClientCommand client("TestWorkSpace");
-	task.runCommand(&client, CommandArgs());
+    P4ClientCommand client(g_workspaceName);
+    if(!task.runCommand(client))
+        return false;
 
-	// Modify spec
-	P4ClientData data = client.GetClientData();
-	data.view.emplace_back("-//data/.../*.zip //TestWorkSpace/data/.../*.zip");
+    P4ClientData data = client.GetClientData();
+    data.view.emplace_back("-//data/.../*.zip //TestWorkSpace/data/.../*.zip");
 
-	// Update spec
-	P4ClientUpdateCommand clientUpdate(data);
-	task.runCommand(&clientUpdate, CommandArgs());
+    P4ClientUpdateCommand clientUpdate(data);
+    bool result = task.runCommand(clientUpdate);
+    return result;
 
 #### Add
 "Open file(s) in a client workspace for addition to the depot."
 
 http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_add.html
 
-	P4AddCommand add("16");
-	add.AddPath("k:/Perforce/TestWorkSpace/data/...");
-	task.runCommand(&add, CommandArgs());
+    P4AddCommand add(g_changelist);
+    add.AddPath(g_depotPath);
+    bool result = task.runCommand(add);
+    return result;
 
 #### Edit
 "Opens file(s) in a client workspace for edit."
 
 http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_edit.html
 
-	P4EditCommand edit("16", false);
-	edit.AddPath("//data/...");
-	task.runCommand(&edit, CommandArgs());
+    P4EditCommand edit(g_changelist);
+    edit.AddPath(g_depotPath);
+    bool result = task.runCommand(edit);
+    return result;
 
 #### New changelist
 "Create or edit a changelist specification."
 
 http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_change.html
 
-	P4NewChangelistCommand change("TestWorkSpace", "username", "Description");
-	task.runCommand(&change, CommandArgs());
+    P4NewChangelistCommand change(g_workspaceName, g_username, "New change list");
+    bool result = task.runCommand(change);
+    return result;
 
 #### Changes
 "List submitted and pending changelists."
 
 http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_changes.html
 
-	P4PendingChangelistCommand pending(g_username);
-	task.runCommand(&pending, CommandArgs());
+    P4ChangesCommand pending(g_username);
+    bool result = task.runCommand(pending);
+    return result;
 
 #### Sync
 "Update the client workspace to reflect the contents of the depot."
 
 http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_sync.html
 
-	P4SyncCommand sync;
-	sync.AddPath("//data/...");
-	task.runCommand(&sync, CommandArgs());
+    P4SyncCommand sync;
+    sync.AddPath(g_depotPath);
+    bool result = task.runCommand(sync);
+    return result;
 
 #### List opened files
 "List files that are open in pending changelists."
 
 http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_opened.html
 
-	P4OpenedCommand opened;
-	opened.SetChangelist("29");
-	task.runCommand(&opened, CommandArgs());
+    P4OpenedCommand opened;
+    opened.SetChangelist(g_changelist);
+    bool result = task.runCommand(opened);
+    return result;
 
 #### Revert changes
 "Discard changes made to open files."
 
 http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_revert.html
 
-	P4RevertChangesCommand revert(false);
-	task.runCommand(&revert, CommandArgs());
+    P4RevertChangesCommand revert(false);
+    revert.AddPath(g_depotPath);
+    bool revertResult = task.runCommand(revert);
+    return revertResult;
 
 #### Lock
 "Lock an opened file against changelist submission."
 
 http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_lock.html
 
-	P4LockCommand lock;
-	lock.AddPath("//data/test/...");
-	task.runCommand(&lock, CommandArgs());
+    P4LockCommand lock;
+    revert.AddPath(g_depotPath);
+    bool result = task.runCommand(lock);
+    return result;
 
 #### Unlock
 "Release the lock on a file."
 
 http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_unlock.html
 
-	P4UnlockCommand unlock;
-	unlock.AddPath("//data/test/...");
-	task.runCommand(&unlock, CommandArgs());
-	
+    P4UnlockCommand unlock;
+    revert.AddPath(g_depotPath);
+    bool result = task.runCommand(unlock);
+    return result;
+
+## Custom arguments
+Custom arguments can be added for any command. For example if you want to preview what would happen if you run add command, you'll get the full list of files and what would happen to them without actually modifying any files or metadata.
+
+    P4AddCommand add(g_changelist);
+    add.AddPath(g_depotPath);
+    add.AddCustomArgument("-n");
+    bool result = task.runCommand(add);
+    return result;	
+
 ## Examples
 
-#### Example of reverting all of the files in specific changelist
+#### Reverting all of the files in specific changelist
 
 This requires two commands, first get list of opened files from changelist and then feed this result to revert command.
 
@@ -145,31 +172,28 @@ This requires two commands, first get list of opened files from changelist and t
 	
 	void main()
 	{
-		// Create P4 tasks, this is used to connect to server and executa commands
-		P4Task task;
-		
-		// Set P4 tasks client
-		task.setP4Client("myworkspacename");
-		
-		// Connect to P4 server
-		task.connect("myusername", "mypassword", "localhost:1666");
-		
-		// Create opened command with changelist number.
-		// Second argument is empty, it's for getting all of the opened files from client
-		std::string changelist = "29";
-		P4OpenedCommand opened(changelist, "");
-		
-		// Run opened command without additonal arguments
-		task.runCommand(&opened, CommandArgs());
-		
-		P4RevertChangesCommand revert(false);
-		
-		// Put all of the open files to our revert command
-		for(auto &tmp : opened.GetOpenedFiles())
-		{
-			revert.AddPath(tmp.first);
-		}
-		
-		// Run revert command without additional arguments
-		task.runCommand(&revert, CommandArgs());
+	    P4Task task;
+	    task.setP4Client(g_workspaceName);
+	    task.setP4Port(g_port);
+	    task.setP4Host(g_host);
+	
+	    if(!task.connect(g_username, g_password))
+	    {
+	        printf("Failed to connect P4!\n");
+	        return;
+	    }
+	
+	    P4OpenedCommand opened;
+	    opened.SetChangelist(g_changelist);
+	
+	    if(!task.runCommand(opened))
+	        return false;
+	
+	    P4RevertChangesCommand revert(false);
+	    for(auto &tmp : opened.GetOpenedFiles())
+	    {
+	        revert.AddPath(tmp.first);
+	    }
+	
+	    task.runCommand(revert);
 	}
