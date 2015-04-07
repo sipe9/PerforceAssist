@@ -146,10 +146,19 @@ http://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_unlock.html
     revert.AddPath(g_depotPath);
     bool result = task.runCommand(unlock);
     return result;
-	
+
+## Custom arguments
+Custom arguments can be added for any command. For example if you want to preview what would happen if you run add command, you'll get the full list of files and what would happen to them without actually modifying any files or metadata.
+
+    P4AddCommand add(g_changelist);
+    add.AddPath(g_depotPath);
+    add.AddCustomArgument("-n");
+    bool result = task.runCommand(add);
+    return result;	
+
 ## Examples
 
-#### Example of reverting all of the files in specific changelist
+#### Reverting all of the files in specific changelist
 
 This requires two commands, first get list of opened files from changelist and then feed this result to revert command.
 
@@ -188,12 +197,3 @@ This requires two commands, first get list of opened files from changelist and t
 	
 	    task.runCommand(revert);
 	}
-
-#### Custom arguments
-Custom arguments can be added for any command. For example if you want to preview what would happen if you run add command, you'll get the full list of files and what would happen to them without actually modifying any files or metadata.
-
-    P4AddCommand add(g_changelist);
-    add.AddPath(g_depotPath);
-    add.AddCustomArgument("-n");
-    bool result = task.runCommand(add);
-    return result;
