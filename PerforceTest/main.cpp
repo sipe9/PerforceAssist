@@ -44,7 +44,8 @@ bool P4TestInfo(P4Task &task)
 bool P4TestAdd(P4Task &task)
 {
     P4AddCommand add(g_changelist);
-    //add.AddPath(g_root + "...");
+    add.AddPath(g_depotPath);
+    add.AddCustomArgument("-n");
     bool result = task.runCommand(add);
     return result;
 }
@@ -212,7 +213,7 @@ void main()
     }
 
     //P4TestInfo(task);
-    //P4TestAdd(task);
+    P4TestAdd(task);
     //P4TestEdit(task);
     //P4TestNewChangelist(task);
     //P4TestChanges(task);
@@ -221,7 +222,7 @@ void main()
     //P4TestRevert(task);
     //P4TestLock(task);
     //P4TestUnlock(task);
-    P4TestClient(task);
+    //P4TestClient(task);
     //P4TestClientUpdate(task);
     //P4TestDepot(task);
 
