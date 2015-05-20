@@ -1,19 +1,18 @@
-
 #pragma once
+
+
 
 #include <string>
 #include <vector>
 
 namespace VersionControl
 {
-	class PathUtil
-	{
-	public:
+    namespace PathUtil
+    {
+        std::string parseDepotPathFromString(const std::string &from);
 
-		static std::string parseDepotPathFromString(const std::string &from);
+        void ConvertToForwardSlashes(std::string &path);        
 
-		static void ConvertToForwardSlashes(std::string &path);
-
-		static bool IsValidDepotPath(const std::string &path);
-	};
+        bool IsValidDepotPath(const std::string &path);
+    }
 }

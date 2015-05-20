@@ -212,8 +212,8 @@ void main()
         return;
     }
 
-    //P4TestInfo(task);
-    P4TestAdd(task);
+    P4TestInfo(task);
+    //P4TestAdd(task);
     //P4TestEdit(task);
     //P4TestNewChangelist(task);
     //P4TestChanges(task);

@@ -100,6 +100,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)\Externals\p4api\x86\debug\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libclient.lib;librpc.lib;libsupp.lib;wsock32.lib;ws2_32.lib;oldnames.lib;libp4sslstub.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <TargetMachine>MachineX86</TargetMachine>
+      <ImportLibrary>$(SolutionDir)bin\x86\$(Configuration)\$(TargetName).lib</ImportLibrary>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
     </Link>
     <Lib>
       <TargetMachine>MachineX86</TargetMachine>

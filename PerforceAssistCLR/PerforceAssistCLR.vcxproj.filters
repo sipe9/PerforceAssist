@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="P4TaskWrapper.cpp" />
+    <ClCompile Include="P4CommandWrapper.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="P4TaskWrapper.h" />
+    <ClInclude Include="P4Structs.h" />
+    <ClInclude Include="P4CommandWrapper.h" />
+    <ClInclude Include="STLWrapper.h" />
+  </ItemGroup>
+</Project>

@@ -15,7 +15,7 @@ namespace VersionControl
 
         void OutputInfo(char level, const char *data);
 
-        bool isDeleted() { m_isDeleted; }
+        bool isDeleted() { return m_isDeleted; }
 
     private:
 
