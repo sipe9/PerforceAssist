@@ -80,7 +80,7 @@ namespace VersionControl
             return "";
         }
 
-		std::string::size_type i1 = str.length() - 1;
+		int i1 = str.length() - 1;
 
 		while (i1 >= 0 && str[i1] == c)
 		{
