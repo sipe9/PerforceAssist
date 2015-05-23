@@ -1,20 +1,17 @@
 #pragma once
 
 #include "P4Task.hpp"
-
-#include "P4Structs.h"
-
 #include "STLWrapper.h"
 
 namespace PerforceAssist
 {
-    public ref class P4TaskWrapper
+    public ref class P4Task
 	{
 
     public:
 
-        P4TaskWrapper();
-        ~P4TaskWrapper();
+        P4Task();
+        ~P4Task();
 
         bool				connect(System::String ^user, System::String ^password);
         bool				disconnect();

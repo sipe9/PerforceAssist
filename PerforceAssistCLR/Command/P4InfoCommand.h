@@ -1,19 +1,16 @@
 #pragma once
 
+#include "P4Command.h"
+
 #include "Commands\P4InfoCommand.hpp"
+
+#include "../P4Task.h"
+
+using namespace System::Collections::Generic;
 
 namespace PerforceAssist
 {
-    enum P4AddResult : int
-    {
-        OpenedForAdd = 0,
-        AlreadyOpenedForAdd,
-        AlreadyOpenedForEdit,
-        AlreadyExists,
-        Unknown,
-    };
-
-    public ref struct P4InfoWrapper
+    public ref struct P4Info
     {
     public:
 
@@ -33,7 +30,7 @@ namespace PerforceAssist
         System::String ^serverDate;
         System::String ^serverUptime;
 
-        P4InfoWrapper::P4InfoWrapper(VersionControl::P4Info &info)
+        P4Info::P4Info(const VersionControl::P4Info &info)
         {
             this->clientIsKnown = info.clientIsKnown;
             this->clientName = gcnew System::String(info.clientName.c_str());
@@ -52,4 +49,21 @@ namespace PerforceAssist
             this->serverUptime = gcnew System::String(info.serverUptime.c_str());
         }
     };
+
+    public ref class P4InfoCommand : public P4Command
+	{
+
+    public:
+
+        P4InfoCommand();
+        ~P4InfoCommand();
+
+        bool                    run(P4Task ^task) override;
+
+        const P4Info            ^getInfo() { return m_info; }
+
+    private:
+
+        P4Info                  ^m_info;
+	};
 }

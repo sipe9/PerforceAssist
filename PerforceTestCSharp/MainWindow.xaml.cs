@@ -35,12 +35,16 @@ namespace PerforceTestCSharp
         {
             InitializeComponent();
 
-            P4TaskWrapper task = new P4TaskWrapper();
-            if(task.connect(_username, _password))
+            P4Task task = new P4Task();
+            if (task.connect(_username, _password))
             {
-                P4CommandWrapper cmd = new P4CommandWrapper();
-                P4InfoWrapper info = cmd.runInfoCommand(task);
-                Debug.WriteLine(String.Format("Connected {0} successfully!", info.serverAddress));
+                P4InfoCommand cmd = new P4InfoCommand();
+                if (cmd.run(task))
+                {
+                    P4Info info = cmd.getInfo();
+                    Debug.WriteLine(String.Format("Connected {0} successfully!", info.serverAddress));
+                }
+            }                
         }
     }
 }

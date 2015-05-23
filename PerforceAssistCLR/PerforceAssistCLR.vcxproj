@@ -79,15 +79,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="P4CommandWrapper.h" />
-    <ClInclude Include="P4Structs.h" />
-    <ClInclude Include="P4TaskWrapper.h" />
+    <ClInclude Include="Command\P4Command.h" />
+    <ClInclude Include="Command\P4InfoCommand.h" />
+    <ClInclude Include="P4Task.h" />
     <ClInclude Include="STLWrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
-    <ClCompile Include="P4CommandWrapper.cpp" />
-    <ClCompile Include="P4TaskWrapper.cpp" />
+    <ClCompile Include="Command\P4Command.cpp" />
+    <ClCompile Include="Command\P4InfoCommand.cpp" />
+    <ClCompile Include="P4Task.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
