@@ -75,6 +75,11 @@ namespace VersionControl
 
 	std::string StringUtil::TrimEnd(const std::string &str, char c)
 	{
+        if(str.empty())
+        {
+            return "";
+        }
+
 		std::string::size_type i1 = str.length() - 1;
 
 		while (i1 >= 0 && str[i1] == c)
@@ -82,14 +87,21 @@ namespace VersionControl
 			--i1;
 		}
 
-		if (i1 < 0)
-			return "";
+        if(i1 < 0)
+        {
+            return "";
+        }
 
 		return str.substr(0, i1 + 1);
 	}
 
 	std::string StringUtil::TrimStart(const std::string &str, char c)
 	{
+        if(str.empty())
+        {
+            return "";
+        }
+
 		std::string::size_type iend = str.length();
 		std::string::size_type i1 = 0;
 
@@ -98,8 +110,10 @@ namespace VersionControl
 			++i1;
 		}
 
-		if (i1 >= iend)
-			return "";
+        if(i1 >= iend)
+        {
+            return "";
+        }
 
 		return str.substr(i1);
 	}
