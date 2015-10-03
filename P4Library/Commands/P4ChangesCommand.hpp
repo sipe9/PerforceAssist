@@ -10,7 +10,7 @@ namespace VersionControl
     {
     public:
 
-        P4ChangesCommand(const std::string &user);
+		P4ChangesCommand(const std::string &username, const std::string &workspace = "", bool onlyPending = true);
 
         virtual bool Run(P4Task &task);
 
@@ -20,7 +20,9 @@ namespace VersionControl
 
     private:
 
-        std::string		m_user;
+		std::string		m_username;
+		std::string		m_workspace;
+		bool			m_onlyPending;
 
         std::vector<P4ChangeData> m_changes;
     };

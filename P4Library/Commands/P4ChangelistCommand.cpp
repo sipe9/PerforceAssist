@@ -15,12 +15,6 @@ namespace VersionControl
 
     bool P4ChangelistCommand::Run(P4Task &task)
     {
-        if(m_changelist.empty())
-        {
-            printf("Failed to run P4ChangelistCommand, changelist number is empty!\n");
-            return false;
-        }
-
         CommandArgs myArgs;
 
         myArgs.emplace_back("-o");
@@ -80,7 +74,7 @@ namespace VersionControl
                     filename = StringUtil::TrimStart(filename, ' ');
                     filename = StringUtil::TrimStart(filename, '\t');
 
-                    filename = PathUtil::parseDepotPathFromString(filename);
+                    filename = PathUtil::parsePathFromString(filename);
                     filename = StringUtil::Trim(filename, '\t');
 
                     m_changeData.files.emplace_back(filename);

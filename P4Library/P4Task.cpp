@@ -21,8 +21,7 @@ namespace VersionControl
     P4Task::P4Task() :
         m_isConnected(false),
         m_needsConnectionRefresh(false),
-        m_client(),
-        m_spec()
+        m_client()
     {
     }
 
@@ -99,16 +98,6 @@ namespace VersionControl
         return m_client.GetHost().Text();
     }
 
-    void P4Task::setP4Root(const std::string &root)
-    {
-        m_root = root;
-    }
-
-    const std::string P4Task::getP4Root() const
-    {
-        return m_root;
-    }
-
     bool P4Task::isConnected()
     {
         return (m_isConnected && !m_needsConnectionRefresh && !m_client.Dropped());
@@ -133,6 +122,11 @@ namespace VersionControl
 
     bool P4Task::runCommand(P4Command &cmd)
     {
+		if (!isConnected())
+		{
+			return false;
+		}
+
         return cmd.Run(*this);
     }
 
@@ -174,6 +168,9 @@ namespace VersionControl
 
     bool P4Task::runP4Command(const std::string &cmd, const CommandArgs &args, P4Command *client)
     {
+		if (!m_isConnected)
+			return false;
+
         if(cmd.empty())
         {
             printf("Invalid P4 command!\n");
@@ -211,7 +208,7 @@ namespace VersionControl
         argBuffer.push_back(0);
 
         // Set argument
-        m_client.SetArgv(argBuffer.size() - 1, &argBuffer[0]);
+        m_client.SetArgv(static_cast<int>(argBuffer.size()) - 1, &argBuffer[0]);
 
         // Run command
         m_client.Run(cmd.c_str(), client);

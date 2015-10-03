@@ -44,8 +44,6 @@ namespace VersionControl
         bool				m_needsConnectionRefresh;
 
         ClientApi			m_client;
-        StrBuf				m_spec;
-        std::string			m_root;
 
         std::string			m_portConfig;
         std::string			m_userConfig;

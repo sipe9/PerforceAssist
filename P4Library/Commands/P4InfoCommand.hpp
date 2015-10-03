@@ -22,6 +22,9 @@ namespace VersionControl
         std::string username;
         std::string serverDate;
         std::string serverUptime;
+		std::string clientStream;
+		std::string	proxyAddress;
+		std::string	proxyVersion;
     };
 
     class P4InfoCommand : public P4Command

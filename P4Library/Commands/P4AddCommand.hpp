@@ -10,6 +10,7 @@ namespace VersionControl
     enum class P4AddResult : int
     {
         OpenedForAdd = 0,
+		OpenedForAddButWasMissing,
         AlreadyOpenedForAdd,
         AlreadyOpenedForEdit,
         AlreadyExists,

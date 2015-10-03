@@ -47,7 +47,7 @@ namespace VersionControl
         std::string line;
         while(std::getline(stream, line))
         {
-            std::string depotFilename = PathUtil::parseDepotPathFromString(line);
+            std::string depotFilename = PathUtil::parsePathFromString(line);
             m_files[depotFilename] = MessageToAddResult(line);
         }
     }

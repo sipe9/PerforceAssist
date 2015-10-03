@@ -10,7 +10,8 @@
 
 namespace VersionControl
 {
-    P4Command::P4Command(const char *name)
+    P4Command::P4Command(const char *name) :
+		m_name(name)
     {
     }
 
@@ -33,12 +34,12 @@ namespace VersionControl
 
     void P4Command::OutputError(const char *errBuf)
     {
-        printf("OutputError!\n");
+        printf("%s\n", errBuf);
     }
 
     void P4Command::ErrorPause(char *errBuf, Error *e)
     {
-        printf("ErrorPause!\n");
+        printf("%s\n", errBuf);
     }
 
     void P4Command::OutputInfo(char level, const char *data)

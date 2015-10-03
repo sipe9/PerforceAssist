@@ -16,7 +16,7 @@ namespace VersionControl
 
         void OutputInfo(char level, const char *data);
 
-        const P4ChangeData &GetChangeDate() const { return m_changeData; }
+        const P4ChangeData &GetChangeData() const { return m_changeData; }
 
     private:
 

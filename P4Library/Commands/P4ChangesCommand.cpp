@@ -10,9 +10,11 @@ namespace VersionControl
     static const char* g_Pending2 = "on";
     static const char* g_Pending4 = "by";
 
-    P4ChangesCommand::P4ChangesCommand(const std::string &user) :
+	P4ChangesCommand::P4ChangesCommand(const std::string &username, const std::string &workspace, bool onlyPending) :
         P4Command("changes"),
-        m_user(user)
+		m_username(username),
+		m_workspace(workspace),
+		m_onlyPending(onlyPending)
     {
     }
 
@@ -21,14 +23,24 @@ namespace VersionControl
         m_changes.clear();
 
         CommandArgs myArgs;
-        myArgs.emplace_back("-s");
-        myArgs.emplace_back("pending");
 
-        if(!m_user.empty())
+		if (!m_username.empty())
         {
             myArgs.emplace_back("-u");
-            myArgs.emplace_back(std::string(m_user));
+			myArgs.emplace_back(std::string(m_username));
         }
+
+		if (!m_workspace.empty())
+		{
+			myArgs.emplace_back("-c");
+			myArgs.emplace_back(std::string(m_workspace));
+		}
+
+		if (m_onlyPending)
+		{
+			myArgs.emplace_back("-s");
+			myArgs.emplace_back("pending");
+		}
 
         std::copy(m_customArgs.begin(), m_customArgs.end(), std::back_inserter(myArgs));
 

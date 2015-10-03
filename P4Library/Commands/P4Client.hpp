@@ -18,7 +18,7 @@ namespace VersionControl
         std::vector<std::string>		options;
 
         std::string		submitOptions;
-        std::string		lineEnd;
+        std::string		lineEnd;	
 
         std::vector<std::string>	view;
     };

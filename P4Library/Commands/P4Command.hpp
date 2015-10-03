@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 #include <string>
 #include <vector>
 
@@ -9,6 +7,21 @@
 
 namespace VersionControl
 {
+	enum class P4Action
+	{
+		Add,
+		Edit,
+		Delete,
+		Branch,
+		MoveAdd,
+		MoveDelete,
+		Integrate,
+		Import,
+		Purge,
+		Archive,
+		Unknown,
+	};
+
     typedef std::vector<std::string> CommandArgs;
 
     class P4Task;
@@ -36,10 +49,16 @@ namespace VersionControl
 
         void AddCustomArgument(const std::string &arg);
 
+		bool HasPaths() { return m_paths.size() > 0; }
+		bool HasCustomArguments() { return m_customArgs.size() > 0; }
+
+		const std::string &GetName() const { return m_name; }
+
     protected:
 
         P4Command(const char *name);
 
+		std::string					m_name;
         std::vector<std::string>	m_paths;
         std::vector<std::string>    m_customArgs;
     };

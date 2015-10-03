@@ -13,6 +13,7 @@ namespace VersionControl
     static const char* g_AlreadyOpenedForEdit = "can't add (already opened for edit)";
     static const char* g_WarningAddOfExistingFile = "warning: add of existing file";
     static const char* g_AddExistingFile = "can't add existing file";
+	static const char* g_MissingFile = "- missing, ";
 
     P4AddCommand::P4AddCommand(std::string changelist) :
         P4Command("add"),
@@ -47,7 +48,18 @@ namespace VersionControl
         std::string line;
         while(std::getline(stream, line))
         {
-            std::string depotFilename = PathUtil::parseDepotPathFromString(line);
+			bool isDrivePath = false;
+
+			// Detect if file was missing and is drive path, not depot
+			if (StringUtil::Contains(line, g_MissingFile))
+			{
+				if (line.length() > 1 && line[1] == ':')
+				{
+					isDrivePath = true;
+				}
+			}
+
+			std::string depotFilename = PathUtil::parsePathFromString(line, isDrivePath);
             m_files[depotFilename] = MessageToAddResult(line);
         }
     }
@@ -64,6 +76,8 @@ namespace VersionControl
             return P4AddResult::AlreadyExists;
         else if(StringUtil::endsWith(message, g_AddExistingFile))
             return P4AddResult::AlreadyExists;
+		else if (StringUtil::Contains(message, g_MissingFile))
+			return P4AddResult::OpenedForAddButWasMissing;
         else
         {
             printf("Failed to parse P4AddResult from %s\n", message.c_str());

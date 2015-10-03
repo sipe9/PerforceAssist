@@ -9,10 +9,10 @@ namespace VersionControl
     static const char* g_ChangePrefix = "Change";
     static const char* g_ChangeSuffix = "created.";
 
-    P4NewChangelistCommand::P4NewChangelistCommand(const std::string &client, const std::string &user, const std::string &desc) :
+    P4NewChangelistCommand::P4NewChangelistCommand(const std::string &workspaceName, const std::string &user, const std::string &desc) :
         P4Command("change"),
         m_changelist(""),
-        m_client(client),
+		m_workspaceName(workspaceName),
         m_user(user),
         m_description(desc)
     {
@@ -43,7 +43,7 @@ namespace VersionControl
                 else
                 {
                     printf("Failed to parse new change list number from %s, prefix (%s), number (%s) or suffix (%s) failed!\n",
-                           line.c_str(), split[0], split[1], split[2]);
+						line.c_str(), split[0].c_str(), split[1].c_str(), split[2].c_str());
                 }
             }
             else
@@ -55,15 +55,15 @@ namespace VersionControl
 
     void P4NewChangelistCommand::InputData(StrBuf *strbuf, Error *e)
     {
-        std::string buf = CreateInputBuffer(m_changelist, m_user, m_description);
+        std::string buf = CreateInputBuffer(m_workspaceName, m_user, m_description);
         strbuf->Set(buf.c_str());
     }
 
-    std::string P4NewChangelistCommand::CreateInputBuffer(const std::string &client, const std::string &user, const std::string &desc)
+    std::string P4NewChangelistCommand::CreateInputBuffer(const std::string &workspaceName, const std::string &user, const std::string &desc)
     {
         std::string buf = "";
         buf += "Change:	new\n";
-        buf += "Client:	" + client + "\n";
+        buf += "Client:	" + workspaceName + "\n";
         buf += "User: " + user + "\n";
         buf += "Status: new\n";
         buf += "Description: " + desc + "\n";

@@ -21,6 +21,9 @@ namespace VersionControl
     static const char* g_Username = "User name: ";
     static const char* g_ServerDate = "Server date: ";
     static const char* g_ServerUptime = "Server uptime: ";
+	static const char* g_ClientStream = "Client stream:";
+	static const char* g_ProxyAddress = "Proxy address:";
+	static const char* g_ProxyVersion = "Proxy version:";
 
     P4InfoCommand::P4InfoCommand() :
         P4Command("info")
@@ -87,14 +90,25 @@ namespace VersionControl
             if(m_info.serverUptime.empty() && StringUtil::startsWithAndAssign(line, g_ServerUptime, m_info.serverUptime))
                 continue;
 
+			if (m_info.clientStream.empty() && StringUtil::startsWithAndAssign(line, g_ClientStream, m_info.clientStream))
+				continue;
+
+			if (m_info.proxyAddress.empty() && StringUtil::startsWithAndAssign(line, g_ProxyAddress, m_info.proxyAddress))
+				continue;
+
+			if (m_info.proxyVersion.empty() && StringUtil::startsWithAndAssign(line, g_ProxyVersion, m_info.proxyVersion))
+				continue;
+
             if(StringUtil::startsWith(line, g_ClientUnknown))
             {
                 m_info.clientIsKnown = false;
                 continue;
             }
 
-            // If reached, parse information and store in P4Info struct
+// If reached, parse information and store in P4Info struct
+#if 0
             printf("%s\n", line.c_str());
+#endif
         }
     }
 }
