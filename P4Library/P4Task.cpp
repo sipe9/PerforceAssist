@@ -139,12 +139,12 @@ namespace VersionControl
 		P4LoginCommand login(password);
 		login.Run(*this);
 
-		/*if (login.isLoginRequired())
+		if (login.isLoginRequired())
 		{
 			disconnect();
 			return P4TaskConnectResult::LoginRequired;
 		}
-		else*/
+		else
 		{
 			return P4TaskConnectResult::Successful;
 		}
