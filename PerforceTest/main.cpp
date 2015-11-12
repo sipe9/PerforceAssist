@@ -206,11 +206,20 @@ void main()
     task.setP4Port(g_port);
     task.setP4Host(g_host);
 
-    if(!task.connect(g_username, g_password))
+	P4TaskConnectResult result = task.connect(g_username, g_password);
+
+	if (result == P4TaskConnectResult::LoginRequired)
     {
-        printf("Failed to connect P4!\n");
+        printf("Failed to connect P4 because login is required!\r\n");
         return;
     }
+	else if (result == P4TaskConnectResult::Failed)
+	{
+		printf("Failed to connect P4!\r\n");
+		return;
+	}
+
+	printf("Connected to %s successfully!\r\n", g_port.c_str());
 
     P4TestInfo(task);
     //P4TestAdd(task);
@@ -226,5 +235,5 @@ void main()
     //P4TestClientUpdate(task);
     //P4TestDepot(task);
 
-    return;
+	task.disconnect();
 }
