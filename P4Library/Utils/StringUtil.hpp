@@ -23,5 +23,7 @@ namespace VersionControl
 		static bool Contains(const std::string &s, const std::string &string);
 		static void Split(std::string &s, const char delim, std::vector<std::string> &out);
 		static bool IsPositiveNumber(const std::string &s);
+
+		static std::string Substring(const std::string &s, int start, int length);
 	};
 }

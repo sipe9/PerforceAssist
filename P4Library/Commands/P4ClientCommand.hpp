@@ -12,7 +12,7 @@ namespace VersionControl
     {
     public:
 
-        P4ClientCommand(const std::string &client);
+		P4ClientCommand(const std::string &client, bool checkExistance = false);
 
         virtual bool Run(P4Task &task);
 
@@ -23,6 +23,7 @@ namespace VersionControl
     private:
 
         std::string		m_client;
+		bool			m_checkExistance;
         P4ClientData	m_clientResult;
     };
 }

@@ -18,9 +18,10 @@ namespace VersionControl
     static const char* g_LineEnd = "LineEnd:";
     static const char* g_View = "View:";
 
-    P4ClientCommand::P4ClientCommand(const std::string &client) :
+	P4ClientCommand::P4ClientCommand(const std::string &client, bool checkExistance) :
         P4Command("client"),
-        m_client(client)
+        m_client(client),
+		m_checkExistance(checkExistance)
     {
     }
 
@@ -29,6 +30,12 @@ namespace VersionControl
         CommandArgs myArgs;
 
         myArgs.emplace_back("-o");
+
+		if (m_checkExistance)
+		{
+			myArgs.emplace_back("-t");
+		}
+
         myArgs.emplace_back(m_client);
 
         std::copy(m_customArgs.begin(), m_customArgs.end(), std::back_inserter(myArgs));
@@ -49,56 +56,77 @@ namespace VersionControl
 
         for(unsigned i = 0; i < lines.size(); i++)
         {
-            if(StringUtil::startsWithAndAssign(lines[i], g_Client, m_clientResult.client, true)) continue;
-            if(StringUtil::startsWithAndAssign(lines[i], g_Update, m_clientResult.update, true)) continue;
-            if(StringUtil::startsWithAndAssign(lines[i], g_Access, m_clientResult.access, true)) continue;
-            if(StringUtil::startsWithAndAssign(lines[i], g_Owner, m_clientResult.owner, true)) continue;
-            if(StringUtil::startsWithAndAssign(lines[i], g_Host, m_clientResult.host, true)) continue;
-            if(StringUtil::startsWithAndAssign(lines[i], g_Root, m_clientResult.root, true)) continue;
-            if(StringUtil::startsWithAndAssign(lines[i], g_SubmitOptions, m_clientResult.submitOptions, true)) continue;
-            if(StringUtil::startsWithAndAssign(lines[i], g_LineEnd, m_clientResult.lineEnd, true)) continue;
+			std::string line = lines[i];
 
-            if(StringUtil::startsWith(lines[i], g_Options))
+			if (line.empty())
+				continue;
+
+			// Early out if we get error from the output
+			if (m_checkExistance)
+			{
+				if (StringUtil::startsWith("Client", line) &&
+					StringUtil::Contains(m_client, line) &&
+					StringUtil::Contains("unknown", line) &&
+					StringUtil::Contains("command to create it", line))
+				{
+					m_clientResult.client = "";
+					m_clientResult.owner = "";
+					m_clientResult.root = "";
+					m_clientResult.host = "";
+					break;
+				}
+			}
+
+			if (StringUtil::startsWithAndAssign(line, g_Client, m_clientResult.client, true)) continue;
+			if (StringUtil::startsWithAndAssign(line, g_Update, m_clientResult.update, true)) continue;
+			if (StringUtil::startsWithAndAssign(line, g_Access, m_clientResult.access, true)) continue;
+			if (StringUtil::startsWithAndAssign(line, g_Owner, m_clientResult.owner, true)) continue;
+			if (StringUtil::startsWithAndAssign(line, g_Host, m_clientResult.host, true)) continue;
+			if (StringUtil::startsWithAndAssign(line, g_Root, m_clientResult.root, true)) continue;
+			if (StringUtil::startsWithAndAssign(line, g_SubmitOptions, m_clientResult.submitOptions, true)) continue;
+			if (StringUtil::startsWithAndAssign(line, g_LineEnd, m_clientResult.lineEnd, true)) continue;
+
+			if (StringUtil::startsWith(line, g_Options))
             {
                 std::string tmp;
-                StringUtil::startsWithAndAssign(lines[i], g_Options, tmp, true);
+                StringUtil::startsWithAndAssign(line, g_Options, tmp, true);
                 StringUtil::Split(tmp, ' ', m_clientResult.options);
                 continue;
             }
 
-            if(StringUtil::startsWith(lines[i], g_Description))
+            if(StringUtil::startsWith(line, g_Description))
             {
                 // Step to next line
                 i++;
 
                 do
                 {
-                    std::string descLine = lines[i];
+                    std::string descLine = line;
                     descLine = StringUtil::TrimStart(descLine, ' ');
                     descLine = StringUtil::TrimStart(descLine, '\t');
 
                     m_clientResult.description.emplace_back(descLine);
 
                     i++;
-                } while(i < lines.size() && StringUtil::startsWith(lines[i], "\t"));
+                } while(i < lines.size() && StringUtil::startsWith(line, "\t"));
 
                 continue;
             }
 
-            if(StringUtil::startsWith(lines[i], g_View))
+            if(StringUtil::startsWith(line, g_View))
             {
                 // Step to next line
                 i++;
 
                 do
                 {
-                    std::string view = lines[i];
+                    std::string view = line;
                     view = StringUtil::TrimStart(view, ' ');
                     view = StringUtil::TrimStart(view, '\t');
                     m_clientResult.view.emplace_back(view);
 
                     i++;
-                } while(i < lines.size() && StringUtil::startsWith(lines[i], "\t"));
+                } while(i < lines.size() && StringUtil::startsWith(line, "\t"));
 
                 continue;
             }

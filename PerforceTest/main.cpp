@@ -182,7 +182,7 @@ bool P4TestUpdateChangelist(P4Task &task)
     if(!task.runCommand(cl))
         return false;
 
-    P4ChangeData clData = cl.GetChangeDate();
+    P4ChangeData clData = cl.GetChangeData();
     clData.description.clear();
     clData.description.emplace_back("Wuuhuu, new changelist desc!");
     clData.description.emplace_back("Second line!");

@@ -64,6 +64,9 @@
     <ClCompile Include="Commands\P4DeleteChangelistCommand.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
+    <ClCompile Include="Commands\P4LoginCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Commands\P4SyncCommand.hpp">
@@ -136,6 +139,9 @@
       <Filter>Commands</Filter>
     </ClInclude>
     <ClInclude Include="Commands\P4DeleteChangelistCommand.hpp">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\P4LoginCommand.hpp">
       <Filter>Commands</Filter>
     </ClInclude>
   </ItemGroup>

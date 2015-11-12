@@ -8,21 +8,28 @@
 
 namespace VersionControl
 {
-    class P4Task
+	enum P4TaskConnectResult
+	{
+		Successful = 0,
+		Failed,
+		LoginRequired,
+	};
+
+	class P4Task : public ClientUser
     {
     public:
 
         P4Task();
         ~P4Task();
 
-        bool				connect(const std::string &user, const std::string &password);
+		P4TaskConnectResult	connect(const std::string &user, const std::string &password);
         bool				disconnect();
 
         bool				isConnected();
 
         bool				runCommand(P4Command &cmd);
 
-        bool				runP4Command(const std::string &cmd, const CommandArgs &args, P4Command *client);
+		bool				runP4Command(const std::string &cmd, const CommandArgs &args, ClientUser *client);
 
         std::string			getP4Port();
         std::string			getP4User();
@@ -38,10 +45,10 @@ namespace VersionControl
         void				setP4Host(const std::string &host);
         void				setP4Root(const std::string &root);
 
-    private:
+	private:
 
         bool				m_isConnected;
-        bool				m_needsConnectionRefresh;
+		bool				m_loginRequired;
 
         ClientApi			m_client;
 

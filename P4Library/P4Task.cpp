@@ -1,6 +1,7 @@
 #include "P4Task.hpp"
 
 #include "Commands/P4Command.hpp"
+#include "Commands/P4LoginCommand.hpp"
 
 #if defined(_WINDOWS)
 #include <windows.h>
@@ -20,7 +21,7 @@ namespace VersionControl
 {
     P4Task::P4Task() :
         m_isConnected(false),
-        m_needsConnectionRefresh(false),
+		m_loginRequired(false),
         m_client()
     {
     }
@@ -34,7 +35,6 @@ namespace VersionControl
     {
         m_client.SetPort(port.c_str());
         m_portConfig = port;
-        m_needsConnectionRefresh = true;
     }
 
     std::string P4Task::getP4Port()
@@ -46,7 +46,6 @@ namespace VersionControl
     {
         m_client.SetUser(user.c_str());
         m_userConfig = user;
-        m_needsConnectionRefresh = true;
     }
 
     std::string P4Task::getP4User()
@@ -58,7 +57,6 @@ namespace VersionControl
     {
         m_client.SetClient(client.c_str());
         m_clientConfig = client;
-        m_needsConnectionRefresh = true;
     }
 
     std::string P4Task::getP4Client()
@@ -66,31 +64,10 @@ namespace VersionControl
         return m_client.GetClient().Text();
     }
 
-    void P4Task::setP4Password(const std::string &password)
-    {
-        if(password.empty())
-        {
-            m_client.SetIgnorePassword();
-        }
-        else
-        {
-            m_client.SetPassword(password.c_str());
-        }
-
-        m_passwordConfig = password;
-        m_needsConnectionRefresh = true;
-    }
-
-    const std::string P4Task::getP4Password() const
-    {
-        return m_passwordConfig;
-    }
-
     void P4Task::setP4Host(const std::string &host)
     {
         m_client.SetHost(host.c_str());
         m_hostConfig = host;
-        m_needsConnectionRefresh = true;
     }
 
     std::string P4Task::getP4Host()
@@ -100,7 +77,7 @@ namespace VersionControl
 
     bool P4Task::isConnected()
     {
-        return (m_isConnected && !m_needsConnectionRefresh && !m_client.Dropped());
+        return (m_isConnected && !m_client.Dropped());
     }
 
     bool P4Task::disconnect()
@@ -109,7 +86,6 @@ namespace VersionControl
 
         m_client.Final(&err);
         m_isConnected = false;
-        m_needsConnectionRefresh = false;
 
         if(err.Test())
         {
@@ -130,15 +106,12 @@ namespace VersionControl
         return cmd.Run(*this);
     }
 
-    bool P4Task::connect(const std::string &user, const std::string &password)
+	P4TaskConnectResult P4Task::connect(const std::string &user, const std::string &password)
     {
-        if(isConnected())
-        {
-            return true;
-        }
+		m_passwordConfig = password;
+		m_loginRequired = false;
 
         setP4User(user);
-        setP4Password(password);
 
         m_client.SetProg(g_programName);
 
@@ -153,37 +126,39 @@ namespace VersionControl
 
         Error err;
         m_client.Init(&err);
+		m_client.SetUi(this);
 
-        if(err.Test())
+		if (err.Test() || m_client.Dropped())
         {
             printf("Failed to connect %s!\n", m_portConfig.c_str());
-            return false;
+			return P4TaskConnectResult::Failed;
         }
 
-        m_isConnected = true;
-        m_needsConnectionRefresh = false;
+		m_isConnected = true;
 
-        return true;
+		P4LoginCommand login(password);
+		login.Run(*this);
+
+		/*if (login.isLoginRequired())
+		{
+			disconnect();
+			return P4TaskConnectResult::LoginRequired;
+		}
+		else*/
+		{
+			return P4TaskConnectResult::Successful;
+		}
     }
 
-    bool P4Task::runP4Command(const std::string &cmd, const CommandArgs &args, P4Command *client)
+	bool P4Task::runP4Command(const std::string &cmd, const CommandArgs &args, ClientUser *client)
     {
-		if (!m_isConnected)
+		if (!isConnected())
 			return false;
 
         if(cmd.empty())
         {
             printf("Invalid P4 command!\n");
             return false;
-        }
-
-        if(m_needsConnectionRefresh)
-        {
-            if(!connect(m_userConfig, m_passwordConfig))
-            {
-                printf("P4 connection has dropped and couldn't reconnect!\n");
-                return false;
-            }
         }
 
         std::vector<char*> argBuffer;

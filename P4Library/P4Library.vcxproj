@@ -42,7 +42,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -176,6 +176,7 @@
     <ClCompile Include="Commands\P4DeleteChangelistCommand.cpp" />
     <ClCompile Include="Commands\P4DepotCommand.cpp" />
     <ClCompile Include="Commands\P4LockCommand.cpp" />
+    <ClCompile Include="Commands\P4LoginCommand.cpp" />
     <ClCompile Include="Commands\P4OpenedCommand.cpp" />
     <ClCompile Include="Commands\P4RevertChangesCommand.cpp" />
     <ClCompile Include="Commands\P4SyncCommand.cpp" />
@@ -202,6 +203,7 @@
     <ClInclude Include="Commands\P4Depot.hpp" />
     <ClInclude Include="Commands\P4DepotCommand.hpp" />
     <ClInclude Include="Commands\P4LockCommand.hpp" />
+    <ClInclude Include="Commands\P4LoginCommand.hpp" />
     <ClInclude Include="Commands\P4OpenedCommand.hpp" />
     <ClInclude Include="Commands\P4RevertChangesCommand.hpp" />
     <ClInclude Include="Commands\P4SyncCommand.hpp" />

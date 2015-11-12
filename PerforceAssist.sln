@@ -10,13 +10,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PerforceTest", "PerforceTes
 		{1623EA7D-8F5D-4009-9B3D-786FDA3191C7} = {1623EA7D-8F5D-4009-9B3D-786FDA3191C7}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerforceTestCSharp", "PerforceTestCSharp\PerforceTestCSharp.csproj", "{FB7CAD6B-A425-4A55-AF43-023479314DC8}"
-	ProjectSection(ProjectDependencies) = postProject
-		{9E0B5CB9-96AC-4373-A321-89CC2C62271B} = {9E0B5CB9-96AC-4373-A321-89CC2C62271B}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PerforceAssistCLR", "PerforceAssistCLR\PerforceAssistCLR.vcxproj", "{9E0B5CB9-96AC-4373-A321-89CC2C62271B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,33 +50,6 @@ Global
 		{F7BF3BCF-7621-41CB-BD54-3D3072216E25}.Release|Win32.Build.0 = Release|Win32
 		{F7BF3BCF-7621-41CB-BD54-3D3072216E25}.Release|x64.ActiveCfg = Release|x64
 		{F7BF3BCF-7621-41CB-BD54-3D3072216E25}.Release|x64.Build.0 = Release|x64
-		{FB7CAD6B-A425-4A55-AF43-023479314DC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB7CAD6B-A425-4A55-AF43-023479314DC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB7CAD6B-A425-4A55-AF43-023479314DC8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{FB7CAD6B-A425-4A55-AF43-023479314DC8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{FB7CAD6B-A425-4A55-AF43-023479314DC8}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{FB7CAD6B-A425-4A55-AF43-023479314DC8}.Debug|Win32.Build.0 = Debug|Any CPU
-		{FB7CAD6B-A425-4A55-AF43-023479314DC8}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{FB7CAD6B-A425-4A55-AF43-023479314DC8}.Debug|x64.Build.0 = Debug|Any CPU
-		{FB7CAD6B-A425-4A55-AF43-023479314DC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB7CAD6B-A425-4A55-AF43-023479314DC8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB7CAD6B-A425-4A55-AF43-023479314DC8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{FB7CAD6B-A425-4A55-AF43-023479314DC8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{FB7CAD6B-A425-4A55-AF43-023479314DC8}.Release|Win32.ActiveCfg = Release|Any CPU
-		{FB7CAD6B-A425-4A55-AF43-023479314DC8}.Release|x64.ActiveCfg = Release|Any CPU
-		{9E0B5CB9-96AC-4373-A321-89CC2C62271B}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{9E0B5CB9-96AC-4373-A321-89CC2C62271B}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{9E0B5CB9-96AC-4373-A321-89CC2C62271B}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{9E0B5CB9-96AC-4373-A321-89CC2C62271B}.Debug|Win32.ActiveCfg = Debug|Win32
-		{9E0B5CB9-96AC-4373-A321-89CC2C62271B}.Debug|Win32.Build.0 = Debug|Win32
-		{9E0B5CB9-96AC-4373-A321-89CC2C62271B}.Debug|x64.ActiveCfg = Debug|Win32
-		{9E0B5CB9-96AC-4373-A321-89CC2C62271B}.Debug|x64.Build.0 = Debug|Win32
-		{9E0B5CB9-96AC-4373-A321-89CC2C62271B}.Release|Any CPU.ActiveCfg = Release|Win32
-		{9E0B5CB9-96AC-4373-A321-89CC2C62271B}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{9E0B5CB9-96AC-4373-A321-89CC2C62271B}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{9E0B5CB9-96AC-4373-A321-89CC2C62271B}.Release|Win32.ActiveCfg = Release|Win32
-		{9E0B5CB9-96AC-4373-A321-89CC2C62271B}.Release|Win32.Build.0 = Release|Win32
-		{9E0B5CB9-96AC-4373-A321-89CC2C62271B}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

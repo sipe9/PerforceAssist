@@ -143,4 +143,12 @@ namespace VersionControl
 		}
 		return false;
 	}
+
+	std::string StringUtil::Substring(const std::string &s, int start, int length)
+	{
+		if ((start + length) > static_cast<int>(s.length()))
+			return s;
+
+		return s.substr(start, length);
+	}
 }

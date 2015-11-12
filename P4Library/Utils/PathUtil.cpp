@@ -117,18 +117,13 @@ namespace VersionControl
 	{
 		char *fileExt;
 		char szDir[256];
-		GetFullPathName(path.c_str(), 256, szDir, &fileExt);
+		GetFullPathNameA(path.c_str(), 256, szDir, &fileExt);
 		return std::move(std::string(szDir));
 	}
 
 	bool PathUtil::PathExists(const std::string &path)
 	{
-		DWORD dwAttrib = GetFileAttributes(path.c_str());
+		DWORD dwAttrib = GetFileAttributesA(path.c_str());
 		return (dwAttrib != INVALID_FILE_ATTRIBUTES && !(dwAttrib & FILE_ATTRIBUTE_DIRECTORY));
-	}
-
-	int PathUtil::GetDriveLetterIndex(const std::string &path)
-	{
-		return PathGetDriveNumber(path.c_str());
 	}
 }

@@ -18,7 +18,5 @@ namespace VersionControl
 
 		static std::string GetAbsolutePath(const std::string &path);
 		static bool PathExists(const std::string &path);
-
-		static int GetDriveLetterIndex(const std::string &path);
 	};
 }

@@ -22,4 +22,12 @@ namespace VersionControl
 
         std::vector<std::string>	view;
     };
+
+	struct P4ClientInfo
+	{
+		std::string		workspace;
+		std::string		type;
+		std::string		creationTime;
+		std::string		clientRoot;
+	};
 }
